@@ -18,7 +18,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:orientation="vertical"
             android:padding="20dp">
 
@@ -41,8 +40,7 @@
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/ubuntu_bold"
                     android:text="Third step\n with us!"
-                    android:textSize="28sp">
-                </TextView>
+                    android:textSize="28sp"></TextView>
             </RelativeLayout>
 
             <androidx.cardview.widget.CardView
@@ -448,7 +446,7 @@
                         android:fontFamily="@font/ubuntu_bold"
                         android:text="REGISTER"
                         android:textAlignment="center"
-                        android:textColor="@color/white"/>
+                        android:textColor="@color/white" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
