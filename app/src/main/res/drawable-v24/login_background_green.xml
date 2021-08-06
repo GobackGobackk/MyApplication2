@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <padding
+                android:bottom="20dp"
+                android:left="20dp"
+                android:right="20dp"
+                android:top="20dp" /> //設置內間距
+
+            <size
+                android:width="40dp"
+                android:height="40dp" /> //設置圓形大小
+
+            <gradient
+                android:endColor="@color/green_200"
+                android:gradientRadius="10dp"
+                android:startColor="@color/green_"
+                android:type="linear" /> //設置漸變大小
+        </shape>
+    </item>
+</selector>

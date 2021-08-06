@@ -1,0 +1,1766 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity23"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:background="@color/green">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="-154dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/image_back"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_left_24">
+                </ImageView>
+                <TextView
+                    android:id="@+id/textViewExit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="40dp"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/ubuntu_bold"
+                    android:textSize="24sp"
+                    android:text="EXIT">
+                </TextView>
+            </RelativeLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:cardBackgroundColor="@color/green_200"
+                app:cardCornerRadius="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:paddingLeft="10dp"
+                        android:text="Second step\nwith us!\n\nD.I.S.C \nPersonality \nAssessment"
+                        android:textSize="24sp">
+                    </TextView>
+
+                    <ImageView
+                        android:layout_width="204dp"
+                        android:layout_height="203dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        app:srcCompat="@drawable/disc_animal">
+                    </ImageView>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/disc_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="220dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="▲  以下兩兩一組的敘述中，請在兩種反應( A 和 B )中選擇最接近自己反應的選項，雖然有時兩種情況都曾經發生，但請你在最能代表自己大多時候的行為特徵上，填下較多的分數。"
+                        android:textSize="18sp"
+                        android:textStyle="normal" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:gravity="center"
+                        android:weightSum="12">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="3"
+                            android:background="#000">
+                        </View>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="6"
+                            android:fontFamily="@font/ubuntu_medium"
+                            android:text="For Example"
+                            android:textAlignment="center"
+                            android:gravity="center_horizontal"
+                            android:textColor="#020000"
+                            android:textSize="16sp"
+                            >
+                        </TextView>
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="3"
+                            android:background="#000">
+                        </View>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="◆ 如果 A 項就是你的典型行為，請在 A 項填 3 分，B 項填 0 分。"
+                        android:textSize="18sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="◆ 如果兩種行為相較，你較常表現出 A 的行為，請在 A 項填 2 分，B 項填 1 分。"
+                        android:textSize="18sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="◆ 如果 B 項簡直是你的最佳寫照，請在 B 項填 3 分，A 項填 0 分。"
+                        android:textSize="18sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="◆ 如果你平日表現的反應是 B 比 A 多，請在 B 項填 2 分，A 項填 1 分。 "
+                        android:textSize="18sp"
+                        android:textStyle="normal" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:gravity="center"
+                        android:weightSum="12">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="3"
+                            android:background="#000">
+                        </View>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="6"
+                            android:fontFamily="@font/ubuntu_medium"
+                            android:text="Let's Get Started!"
+                            android:textAlignment="center"
+                            android:gravity="center_horizontal"
+                            android:textColor="#020000"
+                            android:textSize="16sp">
+                        </TextView>
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="3"
+                            android:background="#000">
+                        </View>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <!--            1A & 1B-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/green_"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Q_1A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="1A. 就個人而言，我是真的想瞭解別人，\n並建立友誼。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar1A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_1A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/Q_1B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="1B. 我通常不會開放心胸去瞭解別人，\n並與他們建立友誼。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar1B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_1B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--            2A & 2B-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/green_"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Q_2A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="2A. 我通常反應較慢而且會深思熟慮。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar2A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_2A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/Q_2B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="2B. 我通常反應迅速而且是自動自發的。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar2B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_2B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--            3A & 3B-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/green_"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Q_3A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="3A. 對於別人占用我的時間之事，\n我抱持審慎的態度。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar3A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_3A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/Q_3B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="3B. 對於別人占用我的時間之事，\n我總是盡量配合。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar3B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_3B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--            4A & 4B-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/green_"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Q_4A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="4A. 在社交場合中，我總會做一番\n自我介紹。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar4A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_4A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/Q_4B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="4B. 在社交場合中，我總是等著別人\n走過來，向我介紹他們自己。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar4B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_4B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--            5A & 5B-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/green_"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Q_5A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="5A. 我通常把談話的焦點，放在談話的\n對象上，雖然有時與生意或原來的主題\n不甚相關，我也不以為意。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar5A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_5A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/Q_5B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="5B. 我通常把談話的主題，放在工作、\n各項議題、生意、或手邊現有的主題上。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar5B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_5B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--            6A & 6B-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/green_"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Q_6A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="6A. 我通常有點猶豫不決，\n而且對緩慢的節奏有耐心。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar6A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_6A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/Q_6B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="6B. 我通常十分果決，\n而且對緩慢的節奏沒啥耐心。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar6B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_6B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--           7A & 7B-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/green_"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Q_7A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="7A. 我通常依事實或證據做出決策。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar7A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_7A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/Q_7B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="7B. 我通常看感覺、經驗或\n特殊關係來制定決策。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar7B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_7B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--           8A & 8B-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/green_"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Q_8A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="8A. 我時常參與團體的討論。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar8A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_8A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/Q_8B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="8B. 我不常參與團體的討論。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar8B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_8B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--           9A & 9B-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/green_"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Q_9A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="9A. 我通常願意和別人共享，\n並在可能時提供協助。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar9A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_9A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/Q_9B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="9B. 我通常喜歡獨立完成工作，\n或依參與人數多寡，分配個人的工作量。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar9B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_9B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--           10A & 10B-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/green_"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Q_10A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="10A. 我通常會問問題，\n或試探性、委婉地發表意見。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar10A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_10A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/Q_10B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="10B. 我通常會做出直接了當的陳述，\n或直接表達出我的意見。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar10B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_10B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--           11A & 11B-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/green_"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Q_11A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="11A. 我通常主要著重在\n主意、觀念或成果上。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar11A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_11A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/Q_11B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="11B. 我通常主要著重在\n人、互動及感覺上。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar11B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_11B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--           12A & 12B-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/green_"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Q_12A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="12A. 我使用手勢、臉部表情\n或抑揚頓挫，來強調我的重點。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar12A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_12A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/Q_12B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="12B. 我不使用手勢、臉部表情\n或抑揚頓挫，來強調我的重點。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar12B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_12B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--           13A & 13B-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/green_"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Q_13A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="13A. 我通常會接受別人的觀點\n(包括主意、感覺及顧慮)。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar13A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_13A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/Q_13B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="13B. 我通常不會接受別人的觀點\n(包括主意、感覺及顧慮)。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar13B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_13B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--           14A & 14B-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/green_"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Q_14A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="14A. 我通常只在一個審慎評估後及\n可預測狀況下，才會冒險及做出改變。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar14A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_14A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/Q_14B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="14B. 我通常會在一個充滿活力及\n未知的狀況下，勇於冒險並做出改變。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar14B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_14B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--           15A & 15B-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/green_"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Q_15A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="15A. 我通常會保有個人的感覺及看法\n，只有在我願意時，才會與人分享。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar15A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_15A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/Q_15B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="15B. 我通常將與別人分享，\n及討論我的感覺，視為再自然不過，\n及輕鬆自在的事了。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar15B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_15B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--           16A & 16B-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/green_"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Q_16A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="16A. 我通常會尋求嶄新\n或不同的經驗及狀況。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar16A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_16A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/Q_16B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="16B. 我通常會選擇已知\n或熟稔的狀況及關係。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar16B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_16B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--           17A & 17B-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/green_"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Q_17A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="17A. 對別人提出的議題、興趣\n及關心的事物，我通常會有所反應。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar17A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_17A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/Q_17B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="17B. 我只對自己的議題、興趣\n及關心的事物有興趣。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar17B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_17B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--           18A & 18B-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/green_"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Q_18A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="18A. 我對衝突的反應，\n通常是緩慢而且不直接的。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar18A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_18A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/Q_18B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="18B. 我對衝突的反應，\n通常是迅速且直接的。"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar18B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:indeterminate="false"
+                        android:max="3"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/quiztrack"
+                        android:thumb="@drawable/quizthumb" />
+
+                    <TextView
+                        android:id="@+id/textview_score_18B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:text="0 / 3"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"
+                        android:textSize="20sp">
+                    </TextView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <Button
+                android:id="@+id/SubmitButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_background_blue"
+                android:fontFamily="@font/ubuntu_bold"
+                android:text="SUBMIT"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
+                android:textColor="@color/white">
+            </Button>
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
