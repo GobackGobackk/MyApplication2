@@ -33,8 +33,14 @@ public class MainActivity27 extends AppCompatActivity {
     private User user;
     @BindView(R.id.busyTime)
     LinearLayout busyTime;
-    @BindView(R.id.textView58)
-    TextView active;
+    @BindView(R.id.textView100)
+    TextView o;
+    @BindView(R.id.textView61)
+    TextView g;
+    @BindView(R.id.textView77)
+    TextView d;
+    @BindView(R.id.textView62)
+    TextView i;
     @BindView(R.id.goal)
     LinearLayout goal;
 
@@ -282,8 +288,10 @@ public class MainActivity27 extends AppCompatActivity {
                     }
                 }
                 if(dataSnapshot.hasChild("active")){
-                    active.setText(dataSnapshot.child("active").getValue().toString());
-                    active.setTypeface(getTypefaceBold());
+                    o.setText(dataSnapshot.child("active").child("O").getValue().toString());
+                    g.setText(dataSnapshot.child("active").child("G").getValue().toString());
+                    d.setText(dataSnapshot.child("active").child("D").getValue().toString());
+                    i.setText(dataSnapshot.child("active").child("I").getValue().toString());
                 }
             }
             @Override

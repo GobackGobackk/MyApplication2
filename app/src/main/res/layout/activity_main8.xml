@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/green"
-    tools:context=".MainActivity5">
+    tools:context=".MainActivity8">
 
     <TextView
         android:id="@+id/schedule_textview4"

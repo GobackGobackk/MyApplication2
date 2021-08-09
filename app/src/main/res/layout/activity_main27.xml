@@ -73,17 +73,88 @@
                             android:textColor="#020000"
                             android:textSize="16sp"></TextView>
 
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:weightSum="12">
+
                         <TextView
-                            android:id="@+id/textView57"
+                            android:id="@+id/textView74"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:fontFamily="@font/ubuntu_medium"
+                            android:gravity="center_horizontal"
+                            android:text="O"
+                            android:textAlignment="center"></TextView>
+
+                        <TextView
+                            android:id="@+id/textView76"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:fontFamily="@font/ubuntu_medium"
+                            android:gravity="center_horizontal"
+                            android:text="G" />
+
+                        <TextView
+                            android:id="@+id/textView59"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:fontFamily="@font/ubuntu_medium"
+                            android:gravity="center_horizontal"
+                            android:text="D" />
+
+                        <TextView
+                            android:id="@+id/textView60"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:fontFamily="@font/ubuntu_medium"
+                            android:gravity="center_horizontal"
+                            android:text="I" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:weightSum="12">
+
+                        <TextView
+                            android:id="@+id/textView100"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
                             android:fontFamily="@font/ubuntu_regular"
                             android:gravity="center_horizontal"
-                            android:text="積極度" />
+                            android:textAlignment="center"></TextView>
 
                         <TextView
-                            android:id="@+id/textView58"
+                            android:id="@+id/textView61"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:fontFamily="@font/ubuntu_regular"
+                            android:gravity="center_horizontal" />
+
+                        <TextView
+                            android:id="@+id/textView77"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:fontFamily="@font/ubuntu_regular"
+                            android:gravity="center_horizontal" />
+
+                        <TextView
+                            android:id="@+id/textView62"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="3"

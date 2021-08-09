@@ -12,12 +12,14 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.name.model.Calendarrr;
 import com.example.name.model.Profile;
 import com.example.name.model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -69,8 +71,7 @@ public class MainActivity5 extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         userRef = database.getReference("chatRooms/userProfiles/"+ userId);
         eventRef = database.getReference("chatRooms/calendar/" + userId);
-        myRef = database.getReference("chatRooms/ui/" + userId);
-
+        myRef = database.getReference("chatRooms/time");
 
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -128,6 +129,50 @@ public class MainActivity5 extends AppCompatActivity {
                         return true;
                 }
                 return false;
+            }
+        });
+    }
+
+    public void onStart() {
+        super.onStart();
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                if(!snapshot.hasChild(userId)){
+                    AlertDialog.Builder alertDialog =
+                            new AlertDialog.Builder(MainActivity5.this);
+                    alertDialog.setTitle("目前沒有時間紀錄");
+                    alertDialog.setMessage("請先計時再進入此頁面");
+                    alertDialog.setPositiveButton("行事曆", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(MainActivity5.this, MainActivity6.class);
+//                            Bundle bundle = new Bundle();
+//                            bundle.putString("UserId", userId);
+//                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
+                    alertDialog.setNegativeButton("排程",(dialog, which) -> {
+                        Intent intent = new Intent(MainActivity5.this, MainActivity9.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("UserId", userId);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                        finish();
+                    });
+                    alertDialog.setNeutralButton("取消",(dialog, which) -> {
+
+                    });
+                    alertDialog.setCancelable(false);
+                    alertDialog.show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
             }
         });
     }
