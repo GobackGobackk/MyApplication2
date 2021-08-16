@@ -880,28 +880,10 @@ public class MainActivity23 extends AppCompatActivity {
             g=itb1+ita3+itb5+ita7+itb9+ita11+itb13+ita15+itb17;
             d=itb2+ita4+itb6+ita8+itb10+ita12+itb14+ita16+itb18;
             i=ita2+itb4+ita6+itb8+ita10+itb12+ita14+itb16+ita18;
-            if(o>g) {
-                o = 1;
-                g = 0;
-            }
-            else {
-                o = 0;
-                g = 1;
-            }
-            if(d>i){
-                d = 1;
-                i = 0;
-            }
-            else{
-                d = 0;
-                i = 1;
-            }
-            if(g==1 && d==1) result = 100;
-            else if(o==1 && d==1) result = 75;
-            else if(o==1 && i==1) result = 50;
-            else if(g==1 && i==1) result = 25;
-            String rr = Integer.toString(result);
-            userRef.child("active").setValue(rr);
+            userRef.child("active").child("O").setValue(o);
+            userRef.child("active").child("G").setValue(g);
+            userRef.child("active").child("D").setValue(d);
+            userRef.child("active").child("I").setValue(i);
 //            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 //            SharedPreferences.Editor editor = preferences.edit();
 //            editor.putString("UserId", userId);

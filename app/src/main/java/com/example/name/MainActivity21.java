@@ -318,45 +318,45 @@ public class MainActivity21 extends AppCompatActivity {
             myRef.child("busyTime").child("星期六").child("start").setValue(sat1.getText().toString());
             myRef.child("busyTime").child("星期六").child("end").setValue(sat2.getText().toString());
         }
-        calendarRef.addValueEventListener(new ValueEventListener() { //以行事曆為優先
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                for(DataSnapshot child : snapshot.getChildren()){
-                    if (child.child("dayofweek").getValue().toString().equals("星期日")) {
-                        myRef.child("busyTime").child("星期日").child("start").setValue(child.child("eventStartTime").getValue().toString());
-                        myRef.child("busyTime").child("星期日").child("end").setValue(child.child("eventFinishTime").getValue().toString());
-                    }
-                    if (child.child("dayofweek").getValue().toString().equals("星期一")) {
-                        myRef.child("busyTime").child("星期一").child("start").setValue(child.child("eventStartTime").getValue().toString());
-                        myRef.child("busyTime").child("星期一").child("end").setValue(child.child("eventFinishTime").getValue().toString());
-                    }
-                    if (child.child("dayofweek").getValue().toString().equals("星期二")) {
-                        myRef.child("busyTime").child("星期二").child("start").setValue(child.child("eventStartTime").getValue().toString());
-                        myRef.child("busyTime").child("星期二").child("end").setValue(child.child("eventFinishTime").getValue().toString());
-                    }
-                    if (child.child("dayofweek").getValue().toString().equals("星期三")) {
-                        myRef.child("busyTime").child("星期三").child("start").setValue(child.child("eventStartTime").getValue().toString());
-                        myRef.child("busyTime").child("星期三").child("end").setValue(child.child("eventFinishTime").getValue().toString());
-                    }
-                    if(child.child("dayofweek").getValue().toString().equals("星期四")){
-                        myRef.child("busyTime").child("星期四").child("start").setValue(child.child("eventStartTime").getValue().toString());
-                        myRef.child("busyTime").child("星期四").child("end").setValue(child.child("eventFinishTime").getValue().toString());
-                    }
-                    if (child.child("dayofweek").getValue().toString().equals("星期五")) {
-                        myRef.child("busyTime").child("星期五").child("start").setValue(child.child("eventStartTime").getValue().toString());
-                        myRef.child("busyTime").child("星期五").child("end").setValue(child.child("eventFinishTime").getValue().toString());
-                    }
-                    if (child.child("dayofweek").getValue().toString().equals("星期六")) {
-                        myRef.child("busyTime").child("星期六").child("start").setValue(child.child("eventStartTime").getValue().toString());
-                        myRef.child("busyTime").child("星期六").child("end").setValue(child.child("eventFinishTime").getValue().toString());
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-            }
-        });
+//        calendarRef.addValueEventListener(new ValueEventListener() { //以行事曆為優先
+//            @Override
+//            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+//                for(DataSnapshot child : snapshot.getChildren()){
+//                    if (child.child("dayofweek").getValue().toString().equals("星期日")) {
+//                        myRef.child("busyTime").child("星期日").child("start").setValue(child.child("eventStartTime").getValue().toString());
+//                        myRef.child("busyTime").child("星期日").child("end").setValue(child.child("eventFinishTime").getValue().toString());
+//                    }
+//                    if (child.child("dayofweek").getValue().toString().equals("星期一")) {
+//                        myRef.child("busyTime").child("星期一").child("start").setValue(child.child("eventStartTime").getValue().toString());
+//                        myRef.child("busyTime").child("星期一").child("end").setValue(child.child("eventFinishTime").getValue().toString());
+//                    }
+//                    if (child.child("dayofweek").getValue().toString().equals("星期二")) {
+//                        myRef.child("busyTime").child("星期二").child("start").setValue(child.child("eventStartTime").getValue().toString());
+//                        myRef.child("busyTime").child("星期二").child("end").setValue(child.child("eventFinishTime").getValue().toString());
+//                    }
+//                    if (child.child("dayofweek").getValue().toString().equals("星期三")) {
+//                        myRef.child("busyTime").child("星期三").child("start").setValue(child.child("eventStartTime").getValue().toString());
+//                        myRef.child("busyTime").child("星期三").child("end").setValue(child.child("eventFinishTime").getValue().toString());
+//                    }
+//                    if(child.child("dayofweek").getValue().toString().equals("星期四")){
+//                        myRef.child("busyTime").child("星期四").child("start").setValue(child.child("eventStartTime").getValue().toString());
+//                        myRef.child("busyTime").child("星期四").child("end").setValue(child.child("eventFinishTime").getValue().toString());
+//                    }
+//                    if (child.child("dayofweek").getValue().toString().equals("星期五")) {
+//                        myRef.child("busyTime").child("星期五").child("start").setValue(child.child("eventStartTime").getValue().toString());
+//                        myRef.child("busyTime").child("星期五").child("end").setValue(child.child("eventFinishTime").getValue().toString());
+//                    }
+//                    if (child.child("dayofweek").getValue().toString().equals("星期六")) {
+//                        myRef.child("busyTime").child("星期六").child("start").setValue(child.child("eventStartTime").getValue().toString());
+//                        myRef.child("busyTime").child("星期六").child("end").setValue(child.child("eventFinishTime").getValue().toString());
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//            }
+//        });
 //        grpId = groupRef.push().getKey();
 //        groupChatRoom = new GroupChatRoom();
 //        String createdOn = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss").format(new Date());

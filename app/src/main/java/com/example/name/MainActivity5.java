@@ -133,49 +133,46 @@ public class MainActivity5 extends AppCompatActivity {
         });
     }
 
-    public void onStart() {
-        super.onStart();
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                if(!snapshot.hasChild(userId)){
-                    AlertDialog.Builder alertDialog =
-                            new AlertDialog.Builder(MainActivity5.this);
-                    alertDialog.setTitle("目前沒有時間紀錄");
-                    alertDialog.setMessage("請先計時再進入此頁面");
-                    alertDialog.setPositiveButton("行事曆", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(MainActivity5.this, MainActivity6.class);
-//                            Bundle bundle = new Bundle();
-//                            bundle.putString("UserId", userId);
-//                            intent.putExtras(bundle);
-                            startActivity(intent);
-                            finish();
-                        }
-                    });
-                    alertDialog.setNegativeButton("排程",(dialog, which) -> {
-                        Intent intent = new Intent(MainActivity5.this, MainActivity9.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("UserId", userId);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                        finish();
-                    });
-                    alertDialog.setNeutralButton("取消",(dialog, which) -> {
-
-                    });
-                    alertDialog.setCancelable(false);
-                    alertDialog.show();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
-    }
+//    public void onStart() {
+//        super.onStart();
+//        myRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+//                if(!snapshot.hasChild(userId)){
+//                    AlertDialog.Builder alertDialog =
+//                            new AlertDialog.Builder(MainActivity5.this);
+//                    alertDialog.setTitle("目前沒有時間紀錄");
+//                    alertDialog.setMessage("請先計時再進入此頁面");
+//                    alertDialog.setPositiveButton("行事曆", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            Intent intent = new Intent(MainActivity5.this, MainActivity6.class);
+////                            Bundle bundle = new Bundle();
+////                            bundle.putString("UserId", userId);
+////                            intent.putExtras(bundle);
+//                            startActivity(intent);
+//                            finish();
+//                        }
+//                    });
+//                    alertDialog.setNegativeButton("排程",(dialog, which) -> {
+//                        Intent intent = new Intent(MainActivity5.this, MainActivity9.class);
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("UserId", userId);
+//                        intent.putExtras(bundle);
+//                        startActivity(intent);
+//                        finish();
+//                    });
+//                    alertDialog.setCancelable(false);
+//                    alertDialog.show();
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//
+//            }
+//        });
+//    }
     @OnClick(R.id.imageButton6)
     public void onClickk(View view) {
         eventRef.addValueEventListener(new ValueEventListener() {
