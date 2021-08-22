@@ -37,6 +37,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -100,7 +101,7 @@ public class MainActivity8 extends AppCompatActivity {
         myRef = database.getReference("chatRooms/ui/" + userId);
         timeRef = database.getReference("chatRooms/time/");
         alltimeRef = database.getReference("chatRooms/time/");
-        detailRef = database.getReference("chatRooms/detail/" + userId);
+        detailRef = database.getReference("chatRooms/detail/");
         lateRef = database.getReference("chatRooms/late/");
         focusRef = database.getReference("chatRooms/time/");
 
@@ -168,6 +169,8 @@ public class MainActivity8 extends AppCompatActivity {
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 lastdays.setText(snapshot.child("countStart").getValue().toString());
                 maintain.setText(snapshot.child("countFinish").getValue().toString());
+                lastdays.setTypeface(getTypeface());
+                maintain.setTypeface(getTypeface());
             }
 
             @Override
@@ -176,7 +179,7 @@ public class MainActivity8 extends AppCompatActivity {
             }
         });
         dayDiffff = 0;
-        timeRef.addValueEventListener(new ValueEventListener() {//單個活動計算時間 總時間和平均時間
+        timeRef.addValueEventListener(new ValueEventListener() {//單個活動計算時間 總時間和平均時間 上半部分
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild(userId)){
@@ -219,7 +222,9 @@ public class MainActivity8 extends AppCompatActivity {
                                 sVideoLen2 = "00:" + String.format("%02d", iSecond2);
                             }
                             accumulate.setText(sVideoLen);
+                            accumulate.setTypeface(getTypeface());
                             average.setText(sVideoLen2);
+                            average.setTypeface(getTypeface());
                         }
                     }
                 }
@@ -289,6 +294,8 @@ public class MainActivity8 extends AppCompatActivity {
                     }
                     all.setText(sVideoLen);
                     playanddo.setText(playHour + " hr / " + iHour + " hr");
+                    all.setTypeface(getTypeface());
+                    playanddo.setTypeface(getTypeface());
                 }
                 else{
                     all.setText("No data");
@@ -329,20 +336,24 @@ public class MainActivity8 extends AppCompatActivity {
                         }
                     }
                     String zxccv = all.getText().toString();
-                    Double temp;//實際執行時間
-                    if(zxccv.length()>5) temp = (Double.parseDouble(zxccv.split(":")[0])*60+Double.parseDouble(zxccv.split(":")[1]));
-                    else if(zxccv.split(":")[0].equals("00")) temp = 0.0;
-                    else temp = Double.parseDouble(zxccv.split(":")[0]);
+                    Double temp = 0.0;//實際執行時間
+                    if(!zxccv.equals("No data")){
+                        if(zxccv.length()>5) temp = (Double.parseDouble(zxccv.split(":")[0])*60+Double.parseDouble(zxccv.split(":")[1]));
+                        else if(zxccv.split(":")[0].equals("00")) temp = 0.0;
+                        else temp = Double.parseDouble(zxccv.split(":")[0]);
+                    }
                     NumberFormat nf = new DecimalFormat("#%");
                     Double lk = temp/alltime;//執行率
                     String af = nf.format(lk);
                     complete.setText(af);
                     hashMap2.put("complete", af);
+                    complete.setTypeface(getTypeface());
                     String c = String.format("%d", count);
                     ontime.setText(c);// 以前應執行的次數
                 }
                 else{
                     complete.setText("No data");
+                    hashMap2.put("complete", "0");
                     complete.setTypeface(getTypeface());
                     ontime.setText("0");
                 }
@@ -376,6 +387,7 @@ public class MainActivity8 extends AppCompatActivity {
                 }
                 else {
                     ontime.setText("No data");
+                    hashMap2.put("ontime", "0");
                     ontime.setTypeface(getTypeface());
                 }
             }
@@ -399,11 +411,12 @@ public class MainActivity8 extends AppCompatActivity {
                     }
                     String s = String.format("%d", all/c);
                     focus.setText(s + "%");
-                    hashMap2.put("focus", s);
+                    hashMap2.put("focus", s + "%");
                     focus.setTypeface(getTypeface());
                 }
                 else{
                     focus.setText("No data");
+                    hashMap2.put("focus", "0");
                     focus.setTypeface(getTypeface());
                 }
 
@@ -414,12 +427,6 @@ public class MainActivity8 extends AppCompatActivity {
 
             }
         });
-        for(Object Key: hashMap2.keySet()){
-            String m = Key.toString();
-            userRef2.child("ability").child(m).setValue(hashMap2.get(Key));
-
-//            Log.i("log", "hashMap key:" + Key + "hashMap value: " + hashMap.get(Key));
-        }
     }
     public static String getWeek(String time) {
         String Week = "";
@@ -464,6 +471,10 @@ public class MainActivity8 extends AppCompatActivity {
         bundle.putString("UserId", userId);
         bundle.putString("eventName", eventName.getText().toString());
         intent.putExtras(bundle);
+        for(String Key: hashMap2.keySet()){
+            userRef2.child("ability").child(Key).setValue(hashMap2.get(Key));
+//            Log.i("log", "hashMap key:" + Key + "hashMap value: " + hashMap.get(Key));
+        }
         startActivity(intent);
     }
     @OnClick(R.id.textView28)
@@ -482,6 +493,15 @@ public class MainActivity8 extends AppCompatActivity {
         intent.putExtras(bundle);
         startActivity(intent);
     }
+    @OnClick(R.id.login2)
+    public void asd(View view){
+        Intent intent = new Intent(MainActivity8.this, MainActivity5.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("UserId", userId);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
+    }
     private Typeface getTypeface() {
         @SuppressLint("RestrictedApi")
         Typeface typeface = TypefaceCompat.createFromResourcesFontFile(MainActivity8.this, getResources(), R.font.ubuntu_regular, "", 0);
@@ -494,4 +514,5 @@ public class MainActivity8 extends AppCompatActivity {
 
         return typeface;
     }
+
 }

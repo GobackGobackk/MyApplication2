@@ -198,6 +198,7 @@ public class MainActivity5 extends AppCompatActivity {
 //                                bundle.putString("startDay", profile.getCount());
                                 intent.putExtras(bundle);
                                 startActivity(intent);
+                                finish();
                             }
                         });
                 //Show the dialog
