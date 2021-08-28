@@ -33,10 +33,13 @@ import com.google.firebase.database.ValueEventListener;
 import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,14 +63,19 @@ public class MainActivity16 extends Activity implements View.OnClickListener {
     @BindView(R.id.textView55)
     TextView text5;
     @BindView(R.id.textView56)
-    TextView text6;
+    TextView text6;//傳資料用
     @BindView(R.id.textView3)
-    TextView text7;
+    TextView text7;//傳資料用
+    @BindView(R.id.textView75)
+    TextView text8;//傳資料用
+    @BindView(R.id.textView78)
+    TextView text9;//傳資料用
     private FirebaseDatabase database;
-    private DatabaseReference myRef, userRef, detailRef, lateRef, uRef, mRef;
+    private DatabaseReference myRef, userRef, detailRef, lateRef, lateRef2, uRef, mRef, abilityRef, timeRef;
     ArrayList<String> ar = new ArrayList<String>();
     private String userId, sel, groupId;
     private User user;
+    private HashMap<String, Integer> hashMap = new HashMap<>();
 
     private ImageView image;
     private TextView timer;
@@ -95,10 +103,13 @@ public class MainActivity16 extends Activity implements View.OnClickListener {
 
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("chatRooms/time/"+userId);
+        timeRef = database.getReference("chatRooms/time/");
         detailRef = database.getReference("chatRooms/detail/"+userId);
         userRef = database.getReference("chatRooms/calendar/"+userId);
         lateRef = database.getReference("chatRooms/late/"+userId);
+        lateRef2 = database.getReference("chatRooms/late/");
         uRef = database.getReference("chatRooms/userProfiles/"+userId);
+        abilityRef = database.getReference("chatRooms/userProfiles/"+userId+"/ability/");
 
         uRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -113,7 +124,7 @@ public class MainActivity16 extends Activity implements View.OnClickListener {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 String p = String.valueOf(progress);
-                text4.setText(p);
+                text4.setText(p);//專心度數值
             }
 
             @Override
@@ -142,20 +153,28 @@ public class MainActivity16 extends Activity implements View.OnClickListener {
                             Double temp2 = ( Double.parseDouble(child.child("eventFinishTime").getValue().toString().split(":")[0]) * 60 + Double.parseDouble(child.child("eventFinishTime").getValue().toString().split(":")[1]));
                             Double temp3 = temp2 - temp;//一周應執行分鐘
                             String ss = Double.toString(temp3);
-                            text7.setText(ss);
+                            text7.setText(ss);//暫存
 //                            int ii = Integer.valueOf(temp3.intValue());
+
                             if(!child.child("notification").equals("")){
                                 String ssss = child.child("notification").getValue().toString();
                                 mRef = database.getReference("chatRooms/messages/"+ssss);
                             }
                         }
                     }
+                    //每個活動執行的分鐘 之後算執行率
+                    Double temp = ( Double.parseDouble(child.child("eventStartTime").getValue().toString().split(":")[0]) * 60 + Double.parseDouble(child.child("eventStartTime").getValue().toString().split(":")[1]));
+                    Double temp2 = ( Double.parseDouble(child.child("eventFinishTime").getValue().toString().split(":")[0]) * 60 + Double.parseDouble(child.child("eventFinishTime").getValue().toString().split(":")[1]));
+                    Double temp3 = temp2 - temp;//一周應執行分鐘
+                    int ii = Integer.valueOf(temp3.intValue());// 60
+                    hashMap.put(child.child("eventName").getValue().toString(), ii);// 背英文單字 60
                 }
             }
             @Override
             public void onCancelled(DatabaseError error) {
             }
         });
+
         image = (ImageView) findViewById(R.id.calendar_imageView9);
         image.setImageResource(R.drawable.calendar);
         timer = (TextView) findViewById(R.id.textView30);
@@ -182,19 +201,34 @@ public class MainActivity16 extends Activity implements View.OnClickListener {
                 // 保證什麼時候開始，計時的時間都是從0開始計時
                 chronometer.start();
                 chronometer.setBase(SystemClock.elapsedRealtime());
-                detailRef.addValueEventListener(new ValueEventListener() {
+                detailRef.addValueEventListener(new ValueEventListener() {//今天之前 該做的所有次數
                     @Override
                     public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                         Date now = new Date();//取得目前即時的時間
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                         String dateString = sdf.format(now);
+                        int count = 0, alltime = 0;
                         for(DataSnapshot val : snapshot.getChildren()){
-                            if(val.child("eventName").getValue().toString().equals(sel)) {
+//                            if(val.child("eventName").getValue().toString().equals(sel)) {
+                                SimpleDateFormat df3 = new SimpleDateFormat("yyyy-MM-dd");
+                                try {
+                                    Date noww = new Date();//取得目前即時的時間
+                                    Date f = df3.parse(val.child("datee").getValue().toString());
+                                    if(noww.getTime() > f.getTime()){//以前的目標數量
+                                        if(hashMap.containsKey(val.child("eventName").getValue().toString())){
+                                            text8.setText(hashMap.get(val.child("eventName").getValue().toString())+"/");
+                                            int bb = Integer.valueOf(text8.getText().toString().replace("/", ""));//取出之前存在hashMap裡的分鐘數
+                                            alltime += bb; }//把分鐘數加在一起    應達成的時間
+                                        count++;
+                                    }
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
                                 if (val.child("datee").getValue().toString().equals(dateString)) {//當天
                                     Double temp = (Double.parseDouble(val.child("timee").getValue().toString().split(":")[0]) * 60 + Double.parseDouble(val.child("timee").getValue().toString().split(":")[1]));
                                     String nowww = new SimpleDateFormat("HH:mm").format(new Date());
                                     Double noww = (Double.parseDouble(nowww.split(":")[0]) * 60 + Double.parseDouble(nowww.split(":")[1]));
-                                    if (temp < noww) {
+                                    if (temp < noww) {//就當天 該活動而言 執行時間比計畫時間晚
                                         lateBad.setText("遲到 BAD!");
                                         if (oneTime == false) {
                                             String wer = dateString+sel;
@@ -203,8 +237,10 @@ public class MainActivity16 extends Activity implements View.OnClickListener {
                                         }
                                     }
                                 }
-                            }
+//                            }
                         }
+                        text6.setText(String.format("%d", count));
+                        text9.setText(String.format("%d", alltime));
                     }
                     @Override
                     public void onCancelled(@NonNull @NotNull DatabaseError error) {
@@ -260,18 +296,39 @@ public class MainActivity16 extends Activity implements View.OnClickListener {
                             user.getName(), createdOn ,Msg.TYPE_SENT);
                     mRef.child(messageId).setValue(msg);
                 }
-                String jkl = myRef.push().getKey();
-                text6.setText(jkl);
-                String createdOn = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-                String timeOn = new SimpleDateFormat("HH:mm").format(new Date());
-                //儲存執行時間 活動名稱 開始時間 準時
-                Timeee profile = new Timeee();
-                profile.setLastlong(chronometer.getText().toString());
-                profile.setEventName(sel);
-                profile.setCreatedOn(createdOn);
-                profile.setOnTime(timeOn);
-                myRef.child(jkl).setValue(profile);
-                chronometer.setBase(SystemClock.elapsedRealtime());
+
+                //計算準時率
+                lateRef2.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        if(snapshot.hasChild(userId)){
+                            int c = 0;
+                            for(DataSnapshot child : snapshot.child(userId).getChildren()){
+                                c++;
+                            }
+                            int i = Integer.valueOf(text6.getText().toString());
+                            NumberFormat nf = new DecimalFormat("#%");
+                            Double gh = Double.valueOf(i);//共有幾次
+                            Double czx = Double.valueOf(c);//遲到幾次
+                            Double mn = (gh - czx)/gh;
+                            String af = nf.format(mn);
+                            abilityRef.child("ontime").setValue(af);
+                        }
+                        else {
+                            abilityRef.child("ontime").setValue("100%");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+
+
+
+
+//                chronometer.setBase(SystemClock.elapsedRealtime());
                 pauseText();
                 sub.setVisibility(View.VISIBLE);
                 seek.setVisibility(View.VISIBLE);
@@ -294,9 +351,66 @@ public class MainActivity16 extends Activity implements View.OnClickListener {
     }
     @OnClick(R.id.start3)
     public void jdfks(View view){
-        myRef = database.getReference("chatRooms/time/"+userId);
-        String jkl = text6.getText().toString();
+        String jkl = myRef.push().getKey(); //myRef 是 time
+        String createdOn = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        String timeOn = new SimpleDateFormat("HH:mm").format(new Date());
+        //儲存執行時間 活動名稱 開始時間 準時
+        Timeee profile = new Timeee();
+        profile.setLastlong(chronometer.getText().toString());
+        profile.setEventName(sel);
+        profile.setCreatedOn(createdOn);
+        profile.setOnTime(timeOn);
+        myRef.child(jkl).setValue(profile);
+//        myRef = database.getReference("chatRooms/time/"+userId);
         myRef.child(jkl).child("focus").setValue(text4.getText().toString());
+
+        //計算專注率 和 執行率的實際執行時間部分
+        timeRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                if(snapshot.hasChild(userId)){
+                    int c = 0, i = 0, all = 0;
+                    Double day = 0.0;
+                    for(DataSnapshot child : snapshot.child(userId).getChildren()){
+                        if(child.hasChild("focus")) {
+                            Double temp;
+                            if (child.child("lastlong").getValue().toString().length() > 5) {
+                                temp = (Double.parseDouble(child.child("lastlong").getValue().toString().split(":")[0]) * 3600 + Double.parseDouble(child.child("lastlong").getValue().toString().split(":")[1]) * 60 + Double.parseDouble(child.child("lastlong").getValue().toString().split(":")[2]));
+                            } else if (child.child("lastlong").getValue().toString().split(":")[0].equals("00")) {
+                                temp = Double.parseDouble(child.child("lastlong").getValue().toString().split(":")[1]);
+                            } else {
+                                temp = (Double.parseDouble(child.child("lastlong").getValue().toString().split(":")[0]) * 60 + Double.parseDouble(child.child("lastlong").getValue().toString().split(":")[1]));
+                            }
+                            day += temp; //秒為單位
+
+                            c++;
+                            i = Integer.valueOf(child.child("focus").getValue().toString());
+                            all += i;
+                        }
+                    }
+
+                    Double ddd = Double.valueOf(text9.getText().toString());//預設 分鐘為單位
+                    if(ddd == 0.0){
+                        abilityRef.child("complete").setValue("100%");
+                    }else{
+                        String x = String.format("%.0f", day/(ddd/60.0*100.0));
+                        abilityRef.child("complete").setValue(x+"%");
+                    }
+                    String s = String.format("%d", all/c);
+                    abilityRef.child("focus").setValue(s+"%");
+                }
+                else{
+                    abilityRef.child("complete").setValue("0%");
+                    abilityRef.child("focus").setValue("0%");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
         Intent intent = new Intent(MainActivity16.this, MainActivity6.class);
 //        Bundle bundle = new Bundle();
 //        bundle.putString("UserId", userId);

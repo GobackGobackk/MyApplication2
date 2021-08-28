@@ -81,7 +81,6 @@ public class MainActivity8 extends AppCompatActivity {
     private Profile profile;
     private double dayDiffff, play, dayD;
     private HashMap<String, Integer> hashMap = new HashMap<>();
-    private HashMap<String, String> hashMap2 = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -346,14 +345,12 @@ public class MainActivity8 extends AppCompatActivity {
                     Double lk = temp/alltime;//執行率
                     String af = nf.format(lk);
                     complete.setText(af);
-                    hashMap2.put("complete", af);
                     complete.setTypeface(getTypeface());
                     String c = String.format("%d", count);
                     ontime.setText(c);// 以前應執行的次數
                 }
                 else{
                     complete.setText("No data");
-                    hashMap2.put("complete", "0");
                     complete.setTypeface(getTypeface());
                     ontime.setText("0");
                 }
@@ -382,12 +379,10 @@ public class MainActivity8 extends AppCompatActivity {
                     Double mn = (gh - czx)/gh;
                     String af = nf.format(mn);
                     ontime.setText(af);
-                    hashMap2.put("ontime", af);
                     ontime.setTypeface(getTypeface());
                 }
                 else {
                     ontime.setText("No data");
-                    hashMap2.put("ontime", "0");
                     ontime.setTypeface(getTypeface());
                 }
             }
@@ -411,12 +406,10 @@ public class MainActivity8 extends AppCompatActivity {
                     }
                     String s = String.format("%d", all/c);
                     focus.setText(s + "%");
-                    hashMap2.put("focus", s + "%");
                     focus.setTypeface(getTypeface());
                 }
                 else{
                     focus.setText("No data");
-                    hashMap2.put("focus", "0");
                     focus.setTypeface(getTypeface());
                 }
 
@@ -471,10 +464,6 @@ public class MainActivity8 extends AppCompatActivity {
         bundle.putString("UserId", userId);
         bundle.putString("eventName", eventName.getText().toString());
         intent.putExtras(bundle);
-        for(String Key: hashMap2.keySet()){
-            userRef2.child("ability").child(Key).setValue(hashMap2.get(Key));
-//            Log.i("log", "hashMap key:" + Key + "hashMap value: " + hashMap.get(Key));
-        }
         startActivity(intent);
     }
     @OnClick(R.id.textView28)
