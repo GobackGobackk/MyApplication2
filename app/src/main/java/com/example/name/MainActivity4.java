@@ -4,7 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,6 +41,7 @@ public class MainActivity4 extends AppCompatActivity {
         private DatabaseReference myRef, userRef;
         private FirebaseDatabase firebaseDatabase;
         private User user;
+        private String GroupId;
 
 
 
@@ -46,6 +51,7 @@ public class MainActivity4 extends AppCompatActivity {
         setContentView(R.layout.activity_main4);
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
+        GroupId = bundle.getString("GroupId");
 //        Toast.makeText(MainActivity4.this, bundle.getString("GroupId")+bundle.getString("UserId"), Toast.LENGTH_LONG).show();
 
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -123,4 +129,21 @@ public class MainActivity4 extends AppCompatActivity {
 //        Msg msg3 = new Msg("加班么？",Msg.TYPE_RECEIVED);
 //        msgList.add(msg3);
 //    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.menu_member) {
+            Intent intent = new Intent(MainActivity4.this, MainActivity28.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("GroupId", GroupId);
+            intent.putExtras(bundle);
+            startActivity(intent);
+            finish();
+        }
+        return true;
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.third_menu, menu);
+        return true;
+    }
 }

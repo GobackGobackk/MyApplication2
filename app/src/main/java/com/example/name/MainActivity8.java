@@ -95,7 +95,6 @@ public class MainActivity8 extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         userRef = database.getReference("chatRooms/userProfiles/"+ userId);
-        userRef2 = database.getReference("chatRooms/userProfiles/"+ userId);
         eventRef = database.getReference("chatRooms/calendar/" + userId);
         myRef = database.getReference("chatRooms/ui/" + userId);
         timeRef = database.getReference("chatRooms/time/");
@@ -113,6 +112,18 @@ public class MainActivity8 extends AppCompatActivity {
                 text.setText(user.getName());
                 if(user.getGender().equals("Male")) image.setImageResource(R.drawable.study_school_jugyou_man);
                 else image.setImageResource(R.drawable.study_school_jugyou_woman);
+                if(dataSnapshot.hasChild("ability")){
+                    complete.setText(dataSnapshot.child("ability").child("complete").getValue().toString());
+                    focus.setText(dataSnapshot.child("ability").child("focus").getValue().toString());
+                    ontime.setText(dataSnapshot.child("ability").child("ontime").getValue().toString());
+                }else{
+                    complete.setText("No data");
+                    focus.setText("No data");
+                    ontime.setText("No data");
+                }
+//                complete.setTypeface(getTypeface());
+//                focus.setTypeface(getTypeface());
+//                ontime.setTypeface(getTypeface());
             }
             @Override
             public void onCancelled(DatabaseError error) {
@@ -121,7 +132,7 @@ public class MainActivity8 extends AppCompatActivity {
 
 
         eventName.setText(ev123);
-        eventRef.addValueEventListener(new ValueEventListener() {//計算堅持天數和剩餘幾天及目標達成率的分母
+        eventRef.addValueEventListener(new ValueEventListener() {//計算堅持天數和剩餘幾天 及 (目標達成率的分母) 這個改到 Main16算
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 for(DataSnapshot val : snapshot.getChildren()){
@@ -148,11 +159,11 @@ public class MainActivity8 extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }
-                    Double temp = ( Double.parseDouble(cal.getEventStartTime().split(":")[0]) * 60 + Double.parseDouble(cal.getEventStartTime().split(":")[1]));
-                    Double temp2 = ( Double.parseDouble(cal.getEventFinishTime().split(":")[0]) * 60 + Double.parseDouble(cal.getEventFinishTime().split(":")[1]));
-                    Double temp3 = temp2 - temp;//一周應執行分鐘  e.g. 60.0
-                    int ii = Integer.valueOf(temp3.intValue());// 60
-                    hashMap.put(cal.getEventName(), ii);// 背英文單字 60
+//                    Double temp = ( Double.parseDouble(cal.getEventStartTime().split(":")[0]) * 60 + Double.parseDouble(cal.getEventStartTime().split(":")[1]));
+//                    Double temp2 = ( Double.parseDouble(cal.getEventFinishTime().split(":")[0]) * 60 + Double.parseDouble(cal.getEventFinishTime().split(":")[1]));
+//                    Double temp3 = temp2 - temp;//一周應執行分鐘  e.g. 60.0
+//                    int ii = Integer.valueOf(temp3.intValue());// 60
+//                    hashMap.put(cal.getEventName(), ii);// 背英文單字 60
                 }
 
             }
@@ -168,8 +179,8 @@ public class MainActivity8 extends AppCompatActivity {
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 lastdays.setText(snapshot.child("countStart").getValue().toString());
                 maintain.setText(snapshot.child("countFinish").getValue().toString());
-                lastdays.setTypeface(getTypeface());
-                maintain.setTypeface(getTypeface());
+//                lastdays.setTypeface(getTypeface());
+//                maintain.setTypeface(getTypeface());
             }
 
             @Override
@@ -221,17 +232,17 @@ public class MainActivity8 extends AppCompatActivity {
                                 sVideoLen2 = "00:" + String.format("%02d", iSecond2);
                             }
                             accumulate.setText(sVideoLen);
-                            accumulate.setTypeface(getTypeface());
+//                            accumulate.setTypeface(getTypeface());
                             average.setText(sVideoLen2);
-                            average.setTypeface(getTypeface());
+//                            average.setTypeface(getTypeface());
                         }
                     }
                 }
                 else{
                     accumulate.setText("No data");
-                    accumulate.setTypeface(getTypeface());
+//                    accumulate.setTypeface(getTypeface());
                     average.setText("No data");
-                    average.setTypeface(getTypeface());
+//                    average.setTypeface(getTypeface());
                 }
             }
             @Override
@@ -293,14 +304,14 @@ public class MainActivity8 extends AppCompatActivity {
                     }
                     all.setText(sVideoLen);
                     playanddo.setText(playHour + " hr / " + iHour + " hr");
-                    all.setTypeface(getTypeface());
-                    playanddo.setTypeface(getTypeface());
+//                    all.setTypeface(getTypeface());
+//                    playanddo.setTypeface(getTypeface());
                 }
                 else{
                     all.setText("No data");
-                    all.setTypeface(getTypeface());
+//                    all.setTypeface(getTypeface());
                     playanddo.setText("No data");
-                    playanddo.setTypeface(getTypeface());
+//                    playanddo.setTypeface(getTypeface());
                 }
             }
             @Override
@@ -309,117 +320,117 @@ public class MainActivity8 extends AppCompatActivity {
             }
         });
 
-        detailRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                if(snapshot.hasChild(userId)){
-                    String createdOn = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-                    String timeOn = new SimpleDateFormat("HH:mm").format(new Date());
-                    int count = 0, alltime = 0;
-                    SimpleDateFormat df3 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                    for(DataSnapshot child : snapshot.child(userId).getChildren()) {
-                        String bind = child.child("datee").getValue().toString() + " " + child.child("timee").getValue().toString();
-                        try {
-                            Date now = new Date();//取得目前即時的時間
-                            Date f = df3.parse(bind);
-                            if(now.getTime() > f.getTime()){//以前的目標數量
-                                if(hashMap.containsKey(child.child("eventName").getValue().toString())){
-                                    test.setText(hashMap.get(child.child("eventName").getValue().toString())+"/");
-                                    int bb = Integer.valueOf(test.getText().toString().replace("/", ""));//取出之前存在hashMap裡的分鐘數
-                                    alltime += bb; //把分鐘數加在一起    應達成的時間
-                                }
-                                count++;
-                            }
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    String zxccv = all.getText().toString();
-                    Double temp = 0.0;//實際執行時間
-                    if(!zxccv.equals("No data")){
-                        if(zxccv.length()>5) temp = (Double.parseDouble(zxccv.split(":")[0])*60+Double.parseDouble(zxccv.split(":")[1]));
-                        else if(zxccv.split(":")[0].equals("00")) temp = 0.0;
-                        else temp = Double.parseDouble(zxccv.split(":")[0]);
-                    }
-                    NumberFormat nf = new DecimalFormat("#%");
-                    Double lk = temp/alltime;//執行率
-                    String af = nf.format(lk);
-                    complete.setText(af);
-                    complete.setTypeface(getTypeface());
-                    String c = String.format("%d", count);
-                    ontime.setText(c);// 以前應執行的次數
-                }
-                else{
-                    complete.setText("No data");
-                    complete.setTypeface(getTypeface());
-                    ontime.setText("0");
-                }
+//        detailRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+//                if(snapshot.hasChild(userId)){
+//                    String createdOn = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+//                    String timeOn = new SimpleDateFormat("HH:mm").format(new Date());
+//                    int count = 0, alltime = 0;
+//                    SimpleDateFormat df3 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//                    for(DataSnapshot child : snapshot.child(userId).getChildren()) {
+//                        String bind = child.child("datee").getValue().toString() + " " + child.child("timee").getValue().toString();
+//                        try {
+//                            Date now = new Date();//取得目前即時的時間
+//                            Date f = df3.parse(bind);
+//                            if(now.getTime() > f.getTime()){//以前的目標數量
+//                                if(hashMap.containsKey(child.child("eventName").getValue().toString())){
+//                                    test.setText(hashMap.get(child.child("eventName").getValue().toString())+"/");
+//                                    int bb = Integer.valueOf(test.getText().toString().replace("/", ""));//取出之前存在hashMap裡的分鐘數
+//                                    alltime += bb; //把分鐘數加在一起    應達成的時間
+//                                }
+//                                count++;
+//                            }
+//                        } catch (ParseException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                    String zxccv = all.getText().toString();
+//                    Double temp = 0.0;//實際執行時間
+//                    if(!zxccv.equals("No data")){
+//                        if(zxccv.length()>5) temp = (Double.parseDouble(zxccv.split(":")[0])*60+Double.parseDouble(zxccv.split(":")[1]));
+//                        else if(zxccv.split(":")[0].equals("00")) temp = 0.0;
+//                        else temp = Double.parseDouble(zxccv.split(":")[0]);
+//                    }
+//                    NumberFormat nf = new DecimalFormat("#%");
+//                    Double lk = temp/alltime;//執行率
+//                    String af = nf.format(lk);
+//                    complete.setText(af);
+////                    complete.setTypeface(getTypeface());
+//                    String c = String.format("%d", count);
+//                    ontime.setText(c);// 以前應執行的次數
+//                }
+//                else{
+//                    complete.setText("No data");
+////                    complete.setTypeface(getTypeface());
+//                    ontime.setText("0");
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//
+//            }
+//        });
 
-            }
 
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
-
-
-        lateRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                if(snapshot.hasChild(userId)){
-                    int c = 0;
-                    for(DataSnapshot child : snapshot.child(userId).getChildren()){
-                        c++;
-                    }
-                    int i = Integer.valueOf(ontime.getText().toString());
-                    NumberFormat nf = new DecimalFormat("#%");
-                    Double gh = Double.valueOf(i);
-                    Double czx = Double.valueOf(c);
-                    Double mn = (gh - czx)/gh;
-                    String af = nf.format(mn);
-                    ontime.setText(af);
-                    ontime.setTypeface(getTypeface());
-                }
-                else {
-                    ontime.setText("No data");
-                    ontime.setTypeface(getTypeface());
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
-        focusRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                if(snapshot.hasChild(userId)){
-                    int c = 0, i = 0, all = 0;
-                    for(DataSnapshot child : snapshot.child(userId).getChildren()){
-                        if(child.hasChild("focus")){
-                            c++;
-                            i = Integer.valueOf(child.child("focus").getValue().toString());
-                            all += i;
-                        }
-                    }
-                    String s = String.format("%d", all/c);
-                    focus.setText(s + "%");
-                    focus.setTypeface(getTypeface());
-                }
-                else{
-                    focus.setText("No data");
-                    focus.setTypeface(getTypeface());
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
+//        lateRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+//                if(snapshot.hasChild(userId)){
+//                    int c = 0;
+//                    for(DataSnapshot child : snapshot.child(userId).getChildren()){
+//                        c++;
+//                    }
+//                    int i = Integer.valueOf(ontime.getText().toString());
+//                    NumberFormat nf = new DecimalFormat("#%");
+//                    Double gh = Double.valueOf(i);
+//                    Double czx = Double.valueOf(c);
+//                    Double mn = (gh - czx)/gh;
+//                    String af = nf.format(mn);
+//                    ontime.setText(af);
+////                    ontime.setTypeface(getTypeface());
+//                }
+//                else {
+//                    ontime.setText("No data");
+////                    ontime.setTypeface(getTypeface());
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//
+//            }
+//        });
+//        focusRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+//                if(snapshot.hasChild(userId)){
+//                    int c = 0, i = 0, all = 0;
+//                    for(DataSnapshot child : snapshot.child(userId).getChildren()){
+//                        if(child.hasChild("focus")){
+//                            c++;
+//                            i = Integer.valueOf(child.child("focus").getValue().toString());
+//                            all += i;
+//                        }
+//                    }
+//                    String s = String.format("%d", all/c);
+//                    focus.setText(s + "%");
+////                    focus.setTypeface(getTypeface());
+//                }
+//                else{
+//                    focus.setText("No data");
+////                    focus.setTypeface(getTypeface());
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//
+//            }
+//        });
     }
     public static String getWeek(String time) {
         String Week = "";
