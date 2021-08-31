@@ -291,8 +291,8 @@ public class MainActivity18 extends AppCompatActivity {
 //            set4 = new BarDataSet(values4, "地质灾害");
 //            set4.setColor(Color.rgb(255, 102, 0));
 
-            set1.setDrawValues(false);
-            set2.setDrawValues(false);
+            set1.setDrawValues(true);
+            set2.setDrawValues(true);
 //            set3.setDrawValues(false);
 //            set4.setDrawValues(false);
 

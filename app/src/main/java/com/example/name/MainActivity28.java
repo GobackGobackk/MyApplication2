@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,6 +28,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity28 extends AppCompatActivity {
     @BindView(R.id.list)
@@ -34,7 +37,7 @@ public class MainActivity28 extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference myRef, userRef;
     private GroupChatRoom groupChatRoom;
-    private String GroupId, groupName;
+    private String GroupId, userId;
     ArrayList<String> ar = new ArrayList<String>();
 
     @Override
@@ -46,6 +49,7 @@ public class MainActivity28 extends AppCompatActivity {
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
         GroupId = bundle.getString("GroupId");
+        userId = bundle.getString("UserId");
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("chatRooms/group/" + GroupId + "/members/");
         ArrayAdapter adapter = new ArrayAdapter<String>(
@@ -67,5 +71,14 @@ public class MainActivity28 extends AppCompatActivity {
             }
         });
         list.setAdapter(adapter);
+    }
+    @OnClick(R.id.login3)
+    public void asd(View view){
+        Intent intent = new Intent(MainActivity28.this, MainActivity25.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("UserId", userId);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
     }
 }

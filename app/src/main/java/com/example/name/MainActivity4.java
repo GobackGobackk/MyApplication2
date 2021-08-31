@@ -41,7 +41,7 @@ public class MainActivity4 extends AppCompatActivity {
         private DatabaseReference myRef, userRef;
         private FirebaseDatabase firebaseDatabase;
         private User user;
-        private String GroupId;
+        private String GroupId, userId;
 
 
 
@@ -52,6 +52,7 @@ public class MainActivity4 extends AppCompatActivity {
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
         GroupId = bundle.getString("GroupId");
+        userId = bundle.getString("UserId");
 //        Toast.makeText(MainActivity4.this, bundle.getString("GroupId")+bundle.getString("UserId"), Toast.LENGTH_LONG).show();
 
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -135,6 +136,7 @@ public class MainActivity4 extends AppCompatActivity {
             Intent intent = new Intent(MainActivity4.this, MainActivity28.class);
             Bundle bundle = new Bundle();
             bundle.putString("GroupId", GroupId);
+            bundle.putString("UserId", userId);
             intent.putExtras(bundle);
             startActivity(intent);
             finish();
