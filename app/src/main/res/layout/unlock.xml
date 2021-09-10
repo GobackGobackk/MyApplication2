@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#BAC1B8">
+
+    <ImageView
+        android:id="@+id/user_pic"
+        android:layout_width="124dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="104dp"
+        android:background="@drawable/circle_shape"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="138dp"
+        android:layout_marginLeft="138dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="136dp"
+        android:layout_marginRight="136dp"
+        android:text="TextView"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_pic" />
+
+    <TextView
+        android:id="@+id/for_sure"
+        android:layout_width="172dp"
+        android:layout_height="76dp"
+        android:layout_marginStart="176dp"
+        android:layout_marginLeft="176dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="177dp"
+        android:layout_marginRight="177dp"
+        android:gravity="center"
+        android:text="確定要花五枚代幣解鎖能力值嗎？"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_name" />
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="75dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginLeft="90dp"
+        android:layout_marginTop="4dp"
+        android:stateListAnimator="@null"
+        android:text="Button"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/for_sure"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/acc"
+        android:layout_width="75dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="90dp"
+        android:layout_marginRight="90dp"
+        android:stateListAnimator="@null"
+        android:text="Button"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/for_sure"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/acc"
+        app:layout_constraintEnd_toEndOf="@+id/acc"
+        app:layout_constraintStart_toStartOf="@+id/acc"
+        app:layout_constraintTop_toTopOf="@+id/acc"
+        app:srcCompat="@drawable/ic_baseline_check_24"
+        tools:ignore="VectorDrawableCompat,SpeakableTextPresentCheck" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/cancel"
+        app:layout_constraintEnd_toEndOf="@+id/cancel"
+        app:layout_constraintStart_toStartOf="@+id/cancel"
+        app:layout_constraintTop_toTopOf="@+id/cancel"
+        app:srcCompat="@drawable/ic_baseline_close_24"
+        tools:ignore="VectorDrawableCompat,SpeakableTextPresentCheck" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

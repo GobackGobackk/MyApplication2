@@ -2,14 +2,26 @@ package com.example.name;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
+import com.example.name.model.Competition;
+import com.example.name.model.FirebaseDatabaseHelper;
+import com.example.name.model.RecyclerView_config;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,7 +29,14 @@ import butterknife.ButterKnife;
 public class MainActivity24 extends AppCompatActivity {
     @BindView(R.id.bottom_navigation)
     BottomNavigationView bu;
-    private String grpId, groupName, userId, asd, ev123, ssdd;
+    @BindView(R.id.recyclerview_competitions)
+    RecyclerView mRecyclerView;
+    @BindView(R.id.textView79)
+    TextView text;
+    private String grpId, groupName, userId, name, ev123, ssdd;
+    private FirebaseDatabase database;
+    private DatabaseReference myRef, userRef;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +46,40 @@ public class MainActivity24 extends AppCompatActivity {
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
         userId = bundle.getString("UserId");
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("chatRooms/userProfiles/"+userId);
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                text.setText(snapshot.child("name").getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+        new FirebaseDatabaseHelper().readCompetition(new FirebaseDatabaseHelper.DataStatus() {
+            @Override
+            public void DataIsloaded(List<Competition> competitions, List<String> keys) {
+                new RecyclerView_config().setConfig(mRecyclerView, MainActivity24.this, competitions, keys, userId, text.getText().toString());
+            }
+
+            @Override
+            public void DataIsInserted() {
+
+            }
+
+            @Override
+            public void DataIsUpdated() {
+
+            }
+
+            @Override
+            public void DataIsDeleted() {
+
+            }
+        });
         bu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
