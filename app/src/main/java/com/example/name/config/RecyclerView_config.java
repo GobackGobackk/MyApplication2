@@ -1,4 +1,4 @@
-package com.example.name.model;
+package com.example.name.config;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -19,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.name.R;
 import com.example.name.inventer;
+import com.example.name.model.Competition;
+import com.example.name.model.Join;
 import com.example.name.test;
 import com.example.name.unlock_ability;
 import com.google.firebase.database.DataSnapshot;
@@ -32,7 +34,6 @@ import java.util.List;
 public class RecyclerView_config {
     private Context mContext;
     private CompetitionsAdapter mCompetitionsAdapter;
-    private String user, name;
     public void setConfig(RecyclerView recyclerView, Context context, List<Competition> competitions, List<String> keys, String user, String name){
         mContext = context;
         mCompetitionsAdapter = new CompetitionsAdapter(competitions, keys, user, name);

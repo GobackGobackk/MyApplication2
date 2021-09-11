@@ -6,12 +6,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.name.model.Competition;
 import com.example.name.model.FirebaseDatabaseHelper;
-import com.example.name.model.RecyclerView_config;
+import com.example.name.config.RecyclerView_config;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -126,5 +127,34 @@ public class MainActivity24 extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.menu_group) {
+            Intent intent = new Intent(MainActivity24.this, MainActivity29.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("UserId", userId);
+            intent.putExtras(bundle);
+            startActivity(intent);
+            finish();
+//            grpId = myRef.push().getKey();
+//            groupChatRoom = new GroupChatRoom();
+//            String createdOn = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss").format(new Date());
+//            groupChatRoom.setGroupId(grpId);
+//            groupChatRoom.setGroupName(user.getName());
+//            groupChatRoom.setCreatedOn(createdOn);
+//            myRef.child(grpId).setValue(groupChatRoom);
+//            GroupOnlineUsers groupOnlineUsers = new GroupOnlineUsers(user.getId(),
+//                    user.getName());
+//            myRef.child(grpId).child("members").child(user.getId()).setValue(groupOnlineUsers);
+//            Toast.makeText(MainActivity2.this, "Group Created", Toast.LENGTH_LONG).show();
+        }
+        return true;
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.fourth_menu, menu);
+        return true;
     }
 }

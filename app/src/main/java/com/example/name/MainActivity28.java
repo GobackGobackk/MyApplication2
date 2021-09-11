@@ -35,10 +35,11 @@ public class MainActivity28 extends AppCompatActivity {
     ListView list;
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
-    private DatabaseReference myRef, userRef;
+    private DatabaseReference myRef, myRef2;
     private GroupChatRoom groupChatRoom;
     private String GroupId, userId;
     ArrayList<String> ar = new ArrayList<String>();
+    ArrayList<String> ar2 = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,34 +52,85 @@ public class MainActivity28 extends AppCompatActivity {
         GroupId = bundle.getString("GroupId");
         userId = bundle.getString("UserId");
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("chatRooms/group/" + GroupId + "/members/");
-        ArrayAdapter adapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_list_item_1,ar);
+        if(GroupId.length()>6){
+            myRef = database.getReference("chatRooms/group/" + GroupId + "/members/");
+            ArrayAdapter adapter = new ArrayAdapter<String>(
+                    this, android.R.layout.simple_list_item_1,ar);
 
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ar.clear();
-                for(DataSnapshot child : dataSnapshot.getChildren()) {
-                    ar.add(child.child("displayName").getValue().toString());
+            myRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ar.clear();
+                    for(DataSnapshot child : dataSnapshot.getChildren()) {
+                        ar.add(child.child("displayName").getValue().toString());
+                    }
+                    adapter.notifyDataSetChanged();
                 }
-                adapter.notifyDataSetChanged();
-            }
 
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
-            }
-        });
-        list.setAdapter(adapter);
+                }
+            });
+            list.setAdapter(adapter);
+        }else{
+            myRef = database.getReference("dicuess/" + GroupId);
+            myRef2 = database.getReference("chatRooms/userProfiles/");
+
+            ArrayAdapter adapter = new ArrayAdapter<String>(
+                    this, android.R.layout.simple_list_item_1,ar2);
+
+            myRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ar.clear();
+                    for(DataSnapshot child : dataSnapshot.getChildren()) {
+                        ar.add(child.child("user").getValue().toString());//gPoHCK7F...
+                    }
+                    myRef2.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                            ar2.clear();
+                            for(DataSnapshot child : snapshot.getChildren()) {
+                                if (ar.contains(child.getKey())) {
+                                    ar2.add(child.child("name").getValue().toString());//惡魔貓男
+                                }
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+                        @Override
+                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                        }
+                    });
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
+            list.setAdapter(adapter);
+        }
+
     }
     @OnClick(R.id.login3)
     public void asd(View view){
-        Intent intent = new Intent(MainActivity28.this, MainActivity25.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("UserId", userId);
-        intent.putExtras(bundle);
-        startActivity(intent);
-        finish();
+        if(GroupId.length()>6){
+            Intent intent = new Intent(MainActivity28.this, MainActivity25.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("UserId", userId);
+            intent.putExtras(bundle);
+            startActivity(intent);
+            finish();
+        }else{
+            Intent intent = new Intent(MainActivity28.this, MainActivity29.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("UserId", userId);
+            intent.putExtras(bundle);
+            startActivity(intent);
+            finish();
+        }
     }
 }

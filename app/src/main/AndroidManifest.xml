@@ -9,19 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication2">
-        <activity android:name=".test">
-
-        </activity>
-        <activity android:name=".inventer">
-
-        </activity>
-        <activity android:name=".unlock_ability">
-
-        </activity>
-        <activity android:name=".user_ability">
-
-        </activity>
-        <activity android:name=".MainActivity28"></activity>
+        <activity android:name=".MainActivity30"></activity>
+        <activity android:name=".MainActivity29" />
+        <activity android:name=".test" />
+        <activity android:name=".inventer" />
+        <activity android:name=".unlock_ability" />
+        <activity android:name=".user_ability" />
+        <activity android:name=".MainActivity28" />
         <activity android:name=".MainActivity27" />
         <activity android:name=".MainActivity26" />
         <activity android:name=".MainActivity25" />
