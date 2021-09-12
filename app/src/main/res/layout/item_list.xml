@@ -34,6 +34,7 @@
             android:id="@+id/tvName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/ubuntu_bold"
             android:paddingEnd="16dp"
             android:paddingRight="16dp"
             android:text="Android Title"
@@ -44,9 +45,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
+            android:fontFamily="@font/ubuntu_regular"
             android:maxLines="1"
-            android:paddingRight="16dp"
             android:paddingEnd="16dp"
+            android:paddingRight="16dp"
             android:text="Subtitle description,lorem ipsum text generic"
             android:textColor="#999999" />
 

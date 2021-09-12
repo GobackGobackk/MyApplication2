@@ -65,7 +65,7 @@ public class user_ability extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.setClass(user_ability.this, com.example.name.unlock_ability.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);//設定不要重新整理將要跳到的介面
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);//設定不要重新整理將要跳到的介面
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//它可以關掉所要到的介面中間的activity
                 startActivity(intent);
             }

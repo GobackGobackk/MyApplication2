@@ -86,7 +86,7 @@ public class MainActivity22 extends AppCompatActivity {
         }
         groupRef.child(grpId).setValue(groupChatRoom);
         Python py = Python.getInstance();
-        py.getModule("group").get("write_group").call(userId,grpId);
+        py.getModule("group").get("main").call(userId,grpId);
         Intent intent = new Intent(MainActivity22.this, MainActivity25.class);
         Bundle bundle = new Bundle();
         bundle.putString("UserId", userId);

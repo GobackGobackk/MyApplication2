@@ -54,6 +54,7 @@ public class unlock_ability  extends AppCompatActivity {
                 intent.putExtra("name", name);
                 intent.putExtra("pic", pic);
                 startActivity(intent);
+                finish();
             }
         });
 
