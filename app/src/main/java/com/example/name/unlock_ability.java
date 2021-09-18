@@ -50,11 +50,11 @@ public class unlock_ability  extends AppCompatActivity {
             public void onClick(View v) {
 //                Toast.makeText(unlock_ability.this,"click", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent( unlock_ability.this, user_ability.class);
+                intent.putExtra("url", competition_name);
                 intent.putExtra("uid", uid);
                 intent.putExtra("name", name);
                 intent.putExtra("pic", pic);
                 startActivity(intent);
-                finish();
             }
         });
 

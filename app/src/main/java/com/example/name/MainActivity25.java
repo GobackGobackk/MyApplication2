@@ -28,7 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity25 extends AppCompatActivity {
-    @BindView(R.id.recyclerView)
+    @BindView(R.id.recyclerViewChat)
     RecyclerView recyclerView;
     @BindView(R.id.bottom_navigation)
     BottomNavigationView bu;

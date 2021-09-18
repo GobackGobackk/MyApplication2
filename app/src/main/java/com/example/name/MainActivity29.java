@@ -6,18 +6,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.name.config.config;
 import com.example.name.config.config2;
 import com.example.name.model.Competition;
-import com.example.name.model.Spinnerrr;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,7 +29,7 @@ import butterknife.OnClick;
 public class MainActivity29 extends AppCompatActivity {
     @BindView(R.id.textView80)
     TextView text;
-    @BindView(R.id.recyclerView)
+    @BindView(R.id.recyclerViewChat)
     RecyclerView recyclerView;
     private String grpId, groupName, userId, name, ev123, ssdd;
     private FirebaseDatabase database;
@@ -81,7 +74,7 @@ public class MainActivity29 extends AppCompatActivity {
                                 Competition competition = child.getValue(Competition.class);
                                 ar2.add(competition);
                                 keys.add(child.getKey());
-                                new config2().setConfig(recyclerView, MainActivity29.this, ar2, keys, userId);
+                                new config2().setConfig2(recyclerView, MainActivity29.this, ar2, keys, userId);
                             }
                         }
 //                        adapter.notifyDataSetChanged();

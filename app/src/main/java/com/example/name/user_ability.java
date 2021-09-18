@@ -32,6 +32,7 @@ public class user_ability extends AppCompatActivity {
     String this_uid; //使用者id
     String this_pic; //使用者pic
     String this_name; //使用者name
+    String this_url;
     private RecyclerView mRecyclerView; //container來存放所有子view
 
     private TextView username;
@@ -64,8 +65,9 @@ public class user_ability extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.setClass(user_ability.this, com.example.name.unlock_ability.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);//設定不要重新整理將要跳到的介面
+                intent.putExtra("url", this_url);
+                intent.setClass(user_ability.this, inventer.class);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);//設定不要重新整理將要跳到的介面
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//它可以關掉所要到的介面中間的activity
                 startActivity(intent);
             }
@@ -126,19 +128,21 @@ public class user_ability extends AppCompatActivity {
         if(getIntent().hasExtra("uid")){
 
             Log.d(TAG,"Found");
+            String url = getIntent().getStringExtra("url");
             String uid = getIntent().getStringExtra("uid");
             String pic = getIntent().getStringExtra("pic");
             String name = getIntent().getStringExtra("name");
-            setUrl(uid, pic, name);
+            setUrl(uid, pic, name, url);
 
         }
     }
 
-    private void setUrl(String uid, String pic, String name){
+    private void setUrl(String uid, String pic, String name, String url){
         Log.d(TAG, "setUid to widgets.");
         this_uid = uid;
         this_name = name;
         this_pic = pic;
+        this_url = url;
     }
 
     private void init() {

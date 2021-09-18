@@ -48,20 +48,20 @@ def get_user(ID):
 # 計算輸入profile的x,y，並存於=>one,two,three,four(包含使用者、當局者)
 # (dict:/chatRooms/userProfiles/targetfile)
 def c_ogdi(targetfile):
-   # print('c_ogdi(',uId,', targetfile)')
-   id = targetfile.get('id')
-   x = targetfile.get('active').get('O')-targetfile.get('active').get('G')
-   y = targetfile.get('active').get('D')-targetfile.get('active').get('I')
-   if x > 0:
-      if y > 0:
-         one[id] = {'x': x,'y': y}
-      else :
-         four[id] = {'x': x, 'y': y}
-   else :
-      if y > 0:
-         two[id] = {'x': x,'y': y}
-      else :
-         three[id] = {'x': x, 'y': y}
+    # print('c_ogdi(',uId,', targetfile)')
+    id = targetfile.get('id')
+    x = targetfile.get('active').get('O')-targetfile.get('active').get('G')
+    y = targetfile.get('active').get('D')-targetfile.get('active').get('I')
+    if x > 0:
+        if y > 0:
+            one[id] = {'x': x,'y': y}
+        else :
+            four[id] = {'x': x, 'y': y}
+    else :
+        if y > 0:
+            two[id] = {'x': x,'y': y}
+        else :
+            three[id] = {'x': x, 'y': y}
 
 # 計算‘當局者‘的x,y，存於=>user_coordinate
 # (當局者(uId),targetfile(userProfile))
@@ -75,38 +75,38 @@ def u_ogdi(uId, targetfile):
 
 # 給定一個座標，判斷要用哪個象限計算最小距離(int, int)
 def callFunction(x,y):
-   # print('callFunction')
-   if x > 0 :
-      if y > 0:
-         #find one
-         return find_closer(x, y, one)
-      else :
-         #find four
-         return find_closer(x, y, four)
-   else :
-      if y > 0:
-         #find two
-         return find_closer(x, y, two)
-      else :
-         #find three
-         return find_closer(x, y, three)
+    # print('callFunction')
+    if x > 0 :
+        if y > 0:
+            #find one
+            return find_closer(x, y, one)
+        else :
+            #find four
+            return find_closer(x, y, four)
+    else :
+        if y > 0:
+            #find two
+            return find_closer(x, y, two)
+        else :
+            #find three
+            return find_closer(x, y, three)
 
 # 給定一個座標，計算最小距離
 def find_closer(x, y, quadrant): #int, int, dict
-   #print('find_closer: ',x,' ',y)
-   # print('find_closer')
-   id = None
-   min = math.pow(math.pow(28, 2) + math.pow(28, 2), 0.5)
-   for q in list(quadrant):
-      q_x = quadrant[q].get('x')
-      q_y = quadrant[q].get('y')
-      distance = math.pow(math.pow(q_x - x, 2) + math.pow(q_y - y, 2), 0.5)
-      if distance < min and( q not in group):
-         id = q
-         # print(distance, min, id)
-         min = distance
-   #print('idx and idy:',quadrant[id].get('x'), '  ',quadrant[id].get('y'))
-   return id
+    #print('find_closer: ',x,' ',y)
+    # print('find_closer')
+    id = None
+    min = math.pow(math.pow(28, 2) + math.pow(28, 2), 0.5)
+    for q in list(quadrant):
+        q_x = quadrant[q].get('x')
+        q_y = quadrant[q].get('y')
+        distance = math.pow(math.pow(q_x - x, 2) + math.pow(q_y - y, 2), 0.5)
+        if distance < min and( q not in group):
+            id = q
+            # print(distance, min, id)
+            min = distance
+    #print('idx and idy:',quadrant[id].get('x'), '  ',quadrant[id].get('y'))
+    return id
 
 # 判定一個列表中是否含有’使用者‘，若有就刪除之，並計算包含‘使用者’的群組個數，若有回傳True，反之回傳False
 # (list)

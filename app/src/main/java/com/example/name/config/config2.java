@@ -26,7 +26,7 @@ import java.util.List;
 public class config2 {
     private Context mContext;
     private CompetitionsAdapter mCompetitionsAdapter;
-    public void setConfig(RecyclerView recyclerView, Context context, List<Competition> competitions, List<String> keys, String userId) {
+    public void setConfig2(RecyclerView recyclerView, Context context, List<Competition> competitions, List<String> keys, String userId) {
         mContext = context;
         mCompetitionsAdapter = new CompetitionsAdapter(competitions, keys, userId);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
