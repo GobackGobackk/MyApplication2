@@ -22,6 +22,8 @@ public class unlock_ability  extends AppCompatActivity {
     private static final String  TAG = "unlock";
     String key; //key
     Integer u_position; //位置
+    String myName;
+    String myUserId;
     private TextView username;
     private ImageView userpic;
     private ImageView accept;
@@ -54,6 +56,8 @@ public class unlock_ability  extends AppCompatActivity {
                 intent.putExtra("uid", uid);
                 intent.putExtra("name", name);
                 intent.putExtra("pic", pic);
+                intent.putExtra("myName", myName);
+                intent.putExtra("myUserId", myUserId);
                 startActivity(intent);
             }
         });
@@ -96,13 +100,18 @@ public class unlock_ability  extends AppCompatActivity {
         Log.d(TAG,"getIncomingIntent:");
         String user = getIntent().getStringExtra("user");
         Integer position = getIntent().getIntExtra("user_position", 0);
-        setUrl(user, position);
+        String myName = getIntent().getStringExtra("myName");
+        String myUserId = getIntent().getStringExtra("myUserId");
+
+        setUrl(user, position, myName, myUserId);
     }
 
-    private void setUrl(String user, Integer position){
+    private void setUrl(String user, Integer position, String Name, String UserId){
         Log.d(TAG, "setUser");
         key = user;
         u_position = position;
+        myName = Name;
+        myUserId = UserId;
 //        num = Integer.parseInt(u_position);
     }
 }

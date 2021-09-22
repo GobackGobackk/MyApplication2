@@ -52,6 +52,27 @@ public class MainActivity24 extends AppCompatActivity {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                new FirebaseDatabaseHelper().readCompetition(new FirebaseDatabaseHelper.DataStatus() {
+                    @Override
+                    public void DataIsloaded(List<Competition> competitions, List<String> keys) {
+                        new RecyclerView_config().setConfig(mRecyclerView, MainActivity24.this, competitions, keys, userId, snapshot.child("name").getValue().toString());
+                    }
+
+                    @Override
+                    public void DataIsInserted() {
+
+                    }
+
+                    @Override
+                    public void DataIsUpdated() {
+
+                    }
+
+                    @Override
+                    public void DataIsDeleted() {
+
+                    }
+                });
                 text.setText(snapshot.child("name").getValue().toString());
             }
 
@@ -60,27 +81,7 @@ public class MainActivity24 extends AppCompatActivity {
 
             }
         });
-        new FirebaseDatabaseHelper().readCompetition(new FirebaseDatabaseHelper.DataStatus() {
-            @Override
-            public void DataIsloaded(List<Competition> competitions, List<String> keys) {
-                new RecyclerView_config().setConfig(mRecyclerView, MainActivity24.this, competitions, keys, userId, text.getText().toString());
-            }
 
-            @Override
-            public void DataIsInserted() {
-
-            }
-
-            @Override
-            public void DataIsUpdated() {
-
-            }
-
-            @Override
-            public void DataIsDeleted() {
-
-            }
-        });
         bu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
@@ -149,6 +150,15 @@ public class MainActivity24 extends AppCompatActivity {
 //                    user.getName());
 //            myRef.child(grpId).child("members").child(user.getId()).setValue(groupOnlineUsers);
 //            Toast.makeText(MainActivity2.this, "Group Created", Toast.LENGTH_LONG).show();
+        }
+        else if(item.getItemId() == R.id.menu_two_people_chat) {
+            Intent intent = new Intent(MainActivity24.this, MainActivity30.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("UserId", userId);
+            bundle.putString("UserName", text.getText().toString());
+            intent.putExtras(bundle);
+            startActivity(intent);
+            finish();
         }
         return true;
     }

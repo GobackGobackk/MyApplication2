@@ -24,6 +24,8 @@ public class inventer extends AppCompatActivity {
 
     private static final String  TAG = "inventActivity";
     String key; //位置
+    String myName; //原本使用者的名字
+    String myUserId; //原本使用者的 userId
     TextView invent;
     private RecyclerView mRecyclerView; //container來存放所有子view
 
@@ -52,7 +54,7 @@ public class inventer extends AppCompatActivity {
                         Join userr = child.getValue( Join.class );
                         join.add(userr);
 //                        Toast.makeText(inventer.this, "text"+keys.get(0), Toast.LENGTH_SHORT).show();
-                        new RecyclerView_config().setConfig2(mRecyclerView, inventer.this, join, keys);
+                        new RecyclerView_config().setConfig2(mRecyclerView, inventer.this, join, keys, myUserId, myName);
                     }
                 }
 
@@ -72,13 +74,18 @@ public class inventer extends AppCompatActivity {
             Log.d(TAG,"Found");
 
             String url = getIntent().getStringExtra("url");
-            setUrl(url);
+            String myName = getIntent().getStringExtra("myName");
+            String myUserId = getIntent().getStringExtra("myUserId");
+
+            setUrl(url, myName, myUserId);
 
         }
     }
 
-    private void setUrl(String url){
+    private void setUrl(String url,String Name, String UserId){
         Log.d(TAG, "setUrl to widgets.");
         key = url;
+        myName = Name;
+        myUserId = UserId;
     }
 }

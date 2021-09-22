@@ -34,7 +34,8 @@ import java.util.List;
 public class RecyclerView_config {
     private Context mContext;
     private CompetitionsAdapter mCompetitionsAdapter;
-    public void setConfig(RecyclerView recyclerView, Context context, List<Competition> competitions, List<String> keys, String user, String name){
+
+    public void setConfig(RecyclerView recyclerView, Context context, List<Competition> competitions, List<String> keys, String user, String name){//user是userId name是使用者名字
         mContext = context;
         mCompetitionsAdapter = new CompetitionsAdapter(competitions, keys, user, name);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -45,9 +46,9 @@ public class RecyclerView_config {
     private Context mContextJoin;
     private JoinsAdapter mJoinsAdapter;
 
-    public void setConfig2(RecyclerView recyclerView, Context context, List<Join> joins, List<String> keys){
+    public void setConfig2(RecyclerView recyclerView, Context context, List<Join> joins, List<String> keys, String user, String name){
         mContextJoin = context;
-        mJoinsAdapter = new JoinsAdapter(joins, keys);
+        mJoinsAdapter = new JoinsAdapter(joins, keys, user, name);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(mJoinsAdapter);
     }
@@ -148,6 +149,8 @@ public class RecyclerView_config {
                     Toast.makeText(v.getContext(),"click", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(mContext, inventer.class);
                     intent.putExtra("url", mKeys.get(position));
+                    intent.putExtra("myName", name);
+                    intent.putExtra("myUserId", user);
                     mContext.startActivity(intent);
                 }
             });
@@ -293,7 +296,7 @@ public class RecyclerView_config {
         }
     }
 
-    class JoinitemView extends RecyclerView.ViewHolder{
+    class JoinitemView extends RecyclerView.ViewHolder{ //inventer.java 中使用
 
         String temp2;
         private String key;
@@ -319,10 +322,14 @@ public class RecyclerView_config {
         private List<Join> mJoinList;
         private List<String> mKeys;
         private Button btnLock;
+        private String user;
+        private String name;
 
-        public JoinsAdapter(List<Join> mJoinList, List<String> mKeys) {
+        public JoinsAdapter(List<Join> mJoinList, List<String> mKeys, String user, String name) {
             this.mJoinList = mJoinList;
             this.mKeys = mKeys;
+            this.user = user;
+            this.name = name;
         }
 
         @NonNull
@@ -344,7 +351,9 @@ public class RecyclerView_config {
 //                    Toast.makeText(v.getContext(),"click"+position, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(mContextJoin, unlock_ability.class);
                     intent.putExtra("user_position", position);
-                    intent.putExtra("user", mKeys.get(position));
+                    intent.putExtra("user", mKeys.get(position));//點選的 userId
+                    intent.putExtra("myName", name);
+                    intent.putExtra("myUserId", user);
                     mContextJoin.startActivity(intent);
                 }
             });

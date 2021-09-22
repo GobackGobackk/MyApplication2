@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,11 +20,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.name.model.GroupChatRoom;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class user_ability extends AppCompatActivity {
 
@@ -33,6 +38,8 @@ public class user_ability extends AppCompatActivity {
     String this_pic; //使用者pic
     String this_name; //使用者name
     String this_url;
+    String myName;
+    String myUserId;
     private RecyclerView mRecyclerView; //container來存放所有子view
 
     private TextView username;
@@ -41,6 +48,13 @@ public class user_ability extends AppCompatActivity {
     private TextView ui_complete;
     private TextView ui_ontime;
     private Button know;
+    private Button try_chat;
+
+    private Boolean build = false;
+
+    private FirebaseDatabase database;
+    private DatabaseReference myRef, userRef;
+    private GroupChatRoom groupChatRoom;
 
     String focus;
     String complete;
@@ -60,6 +74,7 @@ public class user_ability extends AppCompatActivity {
         ui_ontime = (TextView) findViewById(R.id.ontime);
         ui_focus = (TextView) findViewById(R.id.focus);
         know = (Button) findViewById(R.id.know);
+        try_chat = (Button) findViewById(R.id.try_chat);
 
         know.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +84,51 @@ public class user_ability extends AppCompatActivity {
                 intent.setClass(user_ability.this, inventer.class);
 //                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);//設定不要重新整理將要跳到的介面
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//它可以關掉所要到的介面中間的activity
+                intent.putExtra("url", this_url);
+                intent.putExtra("myName", myName);
+                intent.putExtra("myUserId", myUserId);
                 startActivity(intent);
+            }
+        });
+
+        try_chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                database = FirebaseDatabase.getInstance();
+                myRef = database.getReference("tryChat/");
+                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for(DataSnapshot child : dataSnapshot.getChildren()){
+                            if(child.hasChild("members")){
+                                if(child.child("members").hasChild(this_uid) && child.child("members").hasChild(myUserId)){
+                                    build = false;
+                                }
+                                else{
+                                    build = true;
+                                }
+                            }
+                        }
+                        if(build == true){
+                            String grpId = myRef.push().getKey();
+                            myRef.child(grpId).child("groupId").setValue(grpId);
+                            myRef.child(grpId).child("groupName").setValue(this_name);
+                            myRef.child(grpId).child("pic").setValue("Male");
+                            myRef.child(grpId).child("members").child(this_uid).child("displayName").setValue(this_name);
+                            myRef.child(grpId).child("members").child(this_uid).child("userId").setValue(this_uid);
+                            myRef.child(grpId).child("members").child(myUserId).child("displayName").setValue(myName);
+                            myRef.child(grpId).child("members").child(myUserId).child("userId").setValue(myUserId);
+                            Toast.makeText(v.getContext(),"成功建立個別聊天室", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(v.getContext(), "此人已在聊天室名單裡", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.w("TAG", "Failed to read value.", error.toException());
+                    }
+                });
             }
         });
 
@@ -132,17 +191,22 @@ public class user_ability extends AppCompatActivity {
             String uid = getIntent().getStringExtra("uid");
             String pic = getIntent().getStringExtra("pic");
             String name = getIntent().getStringExtra("name");
-            setUrl(uid, pic, name, url);
+            String myName = getIntent().getStringExtra("myName");
+            String myUserId = getIntent().getStringExtra("myUserId");
+            setUrl(uid, pic, name, url, myName, myUserId);
 
         }
     }
 
-    private void setUrl(String uid, String pic, String name, String url){
+    private void setUrl(String uid, String pic, String name, String url, String Name, String UserId){
         Log.d(TAG, "setUid to widgets.");
         this_uid = uid;
         this_name = name;
         this_pic = pic;
         this_url = url;
+        myName = Name;
+        myUserId = UserId;
+
     }
 
     private void init() {
