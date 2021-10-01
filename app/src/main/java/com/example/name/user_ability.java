@@ -103,6 +103,7 @@ public class user_ability extends AppCompatActivity {
                             if(child.hasChild("members")){
                                 if(child.child("members").hasChild(this_uid) && child.child("members").hasChild(myUserId)){
                                     build = false;
+                                    break;
                                 }
                                 else{
                                     build = true;
