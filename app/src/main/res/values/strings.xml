@@ -6,5 +6,8 @@
     <string name="title_schedule">Schedule</string>
     <string name="title_chatroom">Chat room</string>
     <string name="title_profile">Profile</string>
+    <string name="facebook_app_id">362420638666614</string>
+    <string name="fb_login_protocol_scheme">fb362420638666614</string>
+
 
 </resources>

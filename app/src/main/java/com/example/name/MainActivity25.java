@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import com.example.name.config.config;
 import com.example.name.model.GroupChatRoom;
+import com.facebook.login.LoginManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -126,7 +127,10 @@ public class MainActivity25 extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.menu_sign_out) {
-            mAuth.signOut();
+//            mAuth.signOut();
+            mAuth.getInstance().signOut();
+            LoginManager.getInstance().logOut();
+//            startActivity(new Intent(MainActivity25.this, MainActivity.class));
             startActivity(new Intent(MainActivity25.this, MainActivity.class));
             finish();
         }

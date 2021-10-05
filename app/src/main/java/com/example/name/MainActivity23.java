@@ -7,12 +7,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.name.model.FBFriends;
 import com.example.name.model.User;
+import com.example.name.model.UserHelperClass;
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -22,6 +28,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -176,6 +187,10 @@ public class MainActivity23 extends AppCompatActivity {
     private DatabaseReference myRef, userRef, eventRef;
     private String grpId, groupName, userId;
     private FirebaseAuth mAuth;
+    //胡新加的
+    private DatabaseReference reference, FriendReference, UserReference;
+    String id, FBname, FBemail, gender, fbId;
+    //分隔線
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -185,21 +200,90 @@ public class MainActivity23 extends AppCompatActivity {
 
 //        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 //        userId = preferences.getString("UserId", "");
-        Intent intent = this.getIntent();
-        Bundle bundle = intent.getExtras();
-        userId = bundle.getString("UserId");
+        //上面是原本註解掉的
+//        Intent intent = this.getIntent();
+//        Bundle bundle = intent.getExtras();
+//        userId = bundle.getString("UserId");
+//        database = FirebaseDatabase.getInstance();
+//        userRef = database.getReference("chatRooms/userProfiles/"+ userId);
+//        eventRef = database.getReference("chatRooms/calendar/" + userId);
+//        userRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//            }
+//            @Override
+//            public void onCancelled(DatabaseError error) {
+//            }
+//        });
+        //胡新加的
+        mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        userRef = database.getReference("chatRooms/userProfiles/"+ userId);
-        eventRef = database.getReference("chatRooms/calendar/" + userId);
-        userRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+        FirebaseUser mUser = mAuth.getCurrentUser();
+        reference = database.getReference("chatRooms/userProfiles/");
+        id = mUser.getUid();
+        FriendReference = database.getReference("chatRooms/userProfiles/"+id+"/fbFriends");
+        UserReference = database.getReference("chatRooms/userProfiles/"+id);
 
-            }
-            @Override
-            public void onCancelled(DatabaseError error) {
-            }
-        });
+        if(mUser != null) {
+            GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
+                    new GraphRequest.GraphJSONObjectCallback() {
+                        @Override
+                        public void onCompleted(JSONObject object, GraphResponse response) {
+                            Log.d("demo", object.toString());
+                            try {
+                                //id = object.getString("id");
+                                FBname = object.getString("name");
+                                FBemail = object.getString("email");
+//                            FBemail = mUser.getEmail();
+                                gender =  object.getString("gender");
+                                fbId = object.getString("id");
+                                UserHelperClass helperClass = new UserHelperClass(id, FBname, FBemail, gender, fbId);
+                                reference.child(id).setValue(helperClass);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+            //實立化一個 Bundle
+            Bundle userbundle = new Bundle();
+            //儲存資料　第一個為參數key，第二個為Value
+            userbundle.putString("fields", "gender, name, id, email, first_name, last_name");
+            graphRequest.setParameters(userbundle);
+            //An asynchronous call does not block the program from code execution.
+            // In other word, it is running on a separate thread in the background.
+            // Therefore, this Graph API request will be occuring in the background.
+            graphRequest.executeAsync();
+
+            //retrieve FB friends
+            GraphRequest graphRequestFriends = GraphRequest.newMyFriendsRequest(AccessToken.getCurrentAccessToken(),
+                    new GraphRequest.GraphJSONArrayCallback() {
+                        @Override
+                        public void onCompleted(JSONArray objects, GraphResponse response) {
+                            Log.d("Demo", objects.toString());
+                            //Log.d("demo", String.valueOf(objects.length())); objects.length()可以成功顯示該用戶有多少位朋友。
+                            ArrayList<FBFriends> fbFriends = new ArrayList<>();
+                            for (int i = 0; i < objects.length(); i++) {
+                                try {
+                                    JSONObject object = objects.getJSONObject(i);
+                                    String FacebookId = object.getString("id");
+                                    fbFriends.add(new FBFriends(object.getString("name"), FacebookId));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+//                            FriendReference.addListenerForSingleValueEvent();
+                            Log.d("Demoo", String.valueOf(fbFriends));
+                            FriendReference.setValue(fbFriends);
+                        }
+                    });
+            Bundle bundleFriend = new Bundle();
+            bundleFriend.putString("fields", "id, name");
+            graphRequestFriends.setParameters(bundleFriend);
+            graphRequestFriends.executeAsync();
+        }
+
+        //分隔線
         a1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -880,18 +964,25 @@ public class MainActivity23 extends AppCompatActivity {
             g=itb1+ita3+itb5+ita7+itb9+ita11+itb13+ita15+itb17;
             d=itb2+ita4+itb6+ita8+itb10+ita12+itb14+ita16+itb18;
             i=ita2+itb4+ita6+itb8+ita10+itb12+ita14+itb16+ita18;
-            userRef.child("active").child("O").setValue(o);
-            userRef.child("active").child("G").setValue(g);
-            userRef.child("active").child("D").setValue(d);
-            userRef.child("active").child("I").setValue(i);
+//            userRef.child("active").child("O").setValue(o);
+//            userRef.child("active").child("G").setValue(g);
+//            userRef.child("active").child("D").setValue(d);
+//            userRef.child("active").child("I").setValue(i);
+
+            //胡新加的
+            UserReference.child("active").child("O").setValue(o);
+            UserReference.child("active").child("G").setValue(g);
+            UserReference.child("active").child("D").setValue(d);
+            UserReference.child("active").child("I").setValue(i);
+            //分隔線
 //            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 //            SharedPreferences.Editor editor = preferences.edit();
 //            editor.putString("UserId", userId);
 //            editor.apply();
             Intent intent = new Intent(MainActivity23.this, MainActivity26.class);
-            Bundle bundle = new Bundle();
-            bundle.putString("UserId", userId);
-            intent.putExtras(bundle);
+//            Bundle bundle = new Bundle();
+//            bundle.putString("UserId", userId);
+//            intent.putExtras(bundle);
             startActivity(intent);
             finish();
         }

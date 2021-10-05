@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -114,6 +116,12 @@ public class MainActivity26 extends AppCompatActivity {
     private String grpId, groupName, userId;
     private List<String> list = new ArrayList<>();
 
+    //胡新加的
+    private FirebaseAuth mAuth;
+    private DatabaseReference UserReference;
+    String id;
+    //分隔線
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,11 +129,19 @@ public class MainActivity26 extends AppCompatActivity {
         setContentView(R.layout.activity_main26);
         ButterKnife.bind(this);
 
-        Intent intent = this.getIntent();
-        Bundle bundle = intent.getExtras();
-        userId = bundle.getString("UserId");
+//        Intent intent = this.getIntent();
+//        Bundle bundle = intent.getExtras();
+//        userId = bundle.getString("UserId");
+//        database = FirebaseDatabase.getInstance();
+//        userRef = database.getReference("chatRooms/userProfiles/"+ userId+"/goal");
+
+        //胡新加的
+        mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        userRef = database.getReference("chatRooms/userProfiles/"+ userId+"/goal");
+        FirebaseUser mUser = mAuth.getCurrentUser();
+        id = mUser.getUid();
+        UserReference = database.getReference("chatRooms/userProfiles/"+id+"/goal");
+        //分隔線
         list.clear();
     }
     @OnClick(R.id.RegisterButton)
@@ -175,16 +191,21 @@ public class MainActivity26 extends AppCompatActivity {
         if(c43.isChecked()) list.add(c43.getText().toString());
         if(c44.isChecked()) list.add(c44.getText().toString());
         for(String i : list){
-            String key = userRef.push().getKey();
-            userRef.child(key).child("goal").setValue(i);
+//            String key = userRef.push().getKey();
+//            userRef.child(key).child("goal").setValue(i);
+            //胡新加的
+            String Userkey = UserReference.push().getKey();
+            UserReference.child(Userkey).child("goal").setValue(i);
+            //分隔線
         }
 //        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 //        SharedPreferences.Editor editor = preferences.edit();
 //        editor.putString("UserId", userId);
 //        editor.apply();
         Intent intent = new Intent(MainActivity26.this, MainActivity21.class);
+//        Intent intent = new Intent(MainActivity26.this, fbtest.class);
         Bundle bundle4 = new Bundle();
-        bundle4.putString("UserId", userId);
+        bundle4.putString("UserId", id);
         intent.putExtras(bundle4);
         startActivity(intent);
         finish();
