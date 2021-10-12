@@ -134,7 +134,7 @@ public class MainActivity14 extends Activity implements View.OnClickListener {
             case R.id.btn_start:
                 if(is == false) {
                     timerStart(rest * 60000);
-                    mBtnStart.setText("先休息" + rest + "分鐘吧!");
+                    mBtnStart.setVisibility(View.INVISIBLE);
                     is = true;
                 }
                 break;

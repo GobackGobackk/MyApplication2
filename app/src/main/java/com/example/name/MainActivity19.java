@@ -79,4 +79,13 @@ public class MainActivity19 extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+    @OnClick(R.id.login4)
+    public void bnm(View view) {
+        Intent intent = new Intent(MainActivity19.this, MainActivity9.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("UserId", userId);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
+    }
 }

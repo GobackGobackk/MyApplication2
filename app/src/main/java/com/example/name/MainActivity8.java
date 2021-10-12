@@ -46,8 +46,6 @@ import butterknife.OnClick;
 public class MainActivity8 extends AppCompatActivity {
     @BindView(R.id.textView4)//名字
     TextView text;
-    @BindView(R.id.imageButton6)//設定
-    ImageButton event;
     @BindView(R.id.textView7)//選擇的活動
     TextView eventName;
     @BindView(R.id.textView13)//堅持天數

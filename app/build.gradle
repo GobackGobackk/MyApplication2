@@ -88,6 +88,8 @@ dependencies {
     // new for facebook login
     implementation 'com.facebook.android:facebook-android-sdk:5.15.3'
 
+    implementation 'com.mikhaellopez:circularimageview:4.3.0'
+
 
 
 }

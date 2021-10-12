@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.SearchView;
 
 import com.example.name.config.config;
 import com.example.name.model.GroupChatRoom;
@@ -50,6 +51,7 @@ public class MainActivity25 extends AppCompatActivity {
         userId = bundle.getString("UserId");
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("chatRooms/group/");
+        userRef = database.getReference("chatRooms/userProfiles/"+userId);
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -158,6 +160,53 @@ public class MainActivity25 extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
+        MenuItem menuItem = menu.findItem(R.id.app_bar_search);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setQueryHint("尋找朋友!");
+        SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent(MainActivity25.this, MainActivity31.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("UserId", userId);
+                bundle.putString("query", query);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                finish();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return true;
+            }
+        };
+        searchView.setOnQueryTextListener(queryTextListener);
+        MenuItem menuItem1 = menu.findItem(R.id.favorite);
+        menuItem1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                userRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        Intent intent = new Intent(MainActivity25.this, MainActivity32.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("UserId", userId);
+                        bundle.putString("UserName", snapshot.child("name").getValue().toString());
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+
+                return true;
+            }
+        });
         return true;
     }
 }
