@@ -6,10 +6,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.example.name.config.config;
-import com.example.name.config.config3;
 import com.example.name.model.GroupChatRoom;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,27 +26,28 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class MainActivity32 extends AppCompatActivity {
+public class MainActivity34 extends AppCompatActivity {
     @BindView(R.id.recyclerViewChat)
     RecyclerView recyclerView;
     private FirebaseDatabase database;
-    private DatabaseReference myRef, userRef, myRef2;
+    private DatabaseReference myRef, otherRef;
     private GroupChatRoom groupChatRoom;
     private String grpId, groupName, userId, userName;
     ArrayList<GroupChatRoom> ar = new ArrayList<GroupChatRoom>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main32);
+        setContentView(R.layout.activity_main34);
         ButterKnife.bind(this);
 
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
         userId = bundle.getString("UserId");
-        userName = bundle.getString("UserName");
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("chatRooms/invite/");
+        myRef = database.getReference("chatRooms/userProfiles/"+userId+"/friends/");
+
 
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -51,19 +55,26 @@ public class MainActivity32 extends AppCompatActivity {
                 ar.clear();
                 List<String> keys = new ArrayList<>();
                 for(DataSnapshot child : dataSnapshot.getChildren()) {
-                    if (child.child("members").hasChild(userId)) {
-                        GroupChatRoom group = child.getValue(GroupChatRoom.class);
-
-                        for(DataSnapshot child2 : child.child("members").getChildren()){
-                            if(!userName.equals(child2.child("displayName").getValue().toString())){//group.getGroupName惡魔貓男
-                                group.setGroupName(child2.child("displayName").getValue().toString());
-                            }
+                    GroupChatRoom group = new GroupChatRoom();
+                    group.setGroupId(child.child("userId").getValue().toString());
+                    otherRef = database.getReference("chatRooms/userProfiles/"+group.getGroupId());
+                    otherRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                            group.setGroupName(snapshot.child("name").getValue().toString());
+                            if(snapshot.child("gender").getValue().toString().equals("Male")) group.setPic("Male");
+                            else group.setPic("Female");
+                            ar.add(group);
+                            keys.add(group.getGroupId());
+                            new config().setConfig(recyclerView, MainActivity34.this, ar, keys, userId);
                         }
 
-                        ar.add(group);
-                        keys.add(child.getKey());
-                        new config3().setConfig3(recyclerView, MainActivity32.this, ar, keys, userId);
-                    }
+                        @Override
+                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                        }
+                    });
+
                 }
 
             }
@@ -73,5 +84,14 @@ public class MainActivity32 extends AppCompatActivity {
 
             }
         });
+    }
+    @OnClick(R.id.login6)
+    public void vv(View view){
+        Intent intent = new Intent(MainActivity34.this, MainActivity22.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("UserId", userId);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
     }
 }

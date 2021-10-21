@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication2">
-        <activity android:name=".MainActivity32"></activity>
+        <activity android:name=".MainActivity34"></activity>
+        <activity android:name=".MainActivity33" />
+        <activity android:name=".MainActivity32" />
         <activity android:name=".MainActivity31" />
         <activity android:name=".fbtest" />
         <activity android:name=".FacebookLogin">

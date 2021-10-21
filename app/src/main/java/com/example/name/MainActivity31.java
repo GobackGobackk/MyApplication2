@@ -70,7 +70,7 @@ public class MainActivity31 extends AppCompatActivity {
     }
     @OnClick(R.id.textView88)
     public void mm(View view){
-        userRef2.addValueEventListener(new ValueEventListener() {
+        userRef2.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 myRef = database.getReference("chatRooms/invite/");

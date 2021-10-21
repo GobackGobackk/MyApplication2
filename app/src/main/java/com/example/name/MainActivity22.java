@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.chaquo.python.Python;
@@ -70,7 +73,7 @@ public class MainActivity22 extends AppCompatActivity {
             }
         });
     }
-    @OnClick(R.id.button7)
+    @OnClick(R.id.button2)
     public void ajk(View view){
         grpId = groupRef.push().getKey();
         groupChatRoom = new GroupChatRoom();
@@ -93,5 +96,27 @@ public class MainActivity22 extends AppCompatActivity {
         intent.putExtras(bundle);
         startActivity(intent);
         finish();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.fifth_menu, menu);
+        MenuItem menuItem = menu.findItem(R.id.group);
+
+        menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+
+                Intent intent = new Intent(MainActivity22.this, MainActivity34.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("UserId", userId);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                finish();
+
+                return true;
+            }
+        });
+        return true;
     }
 }

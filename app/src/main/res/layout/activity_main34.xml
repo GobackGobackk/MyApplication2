@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/green"
-    tools:context=".MainActivity32">
+    tools:context=".MainActivity34">
 
     <TextView
         android:id="@+id/schedule_textview2"
@@ -14,9 +14,9 @@
         android:layout_height="40dp"
         android:background="@drawable/background_white"
         android:fontFamily="@font/ubuntu_medium"
-        android:gravity="clip_horizontal|right"
-        android:paddingRight="10dp"
+        android:gravity="center_horizontal"
         android:text="Chat room"
+        android:textAlignment="center"
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +61,25 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></androidx.recyclerview.widget.RecyclerView>
+            app:layout_constraintTop_toTopOf="parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <ImageView
+            android:id="@+id/login6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentBottom="false"
+            android:adjustViewBounds="false"
+            android:src="@drawable/ic_back_img_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"></ImageView>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
