@@ -87,8 +87,14 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     // new for facebook login
     implementation 'com.facebook.android:facebook-android-sdk:5.15.3'
+    //add these libraries for fcm
+    implementation 'com.google.firebase:firebase-messaging:20.1.5'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'com.android.volley:volley:1.2.0'
 
     implementation 'com.mikhaellopez:circularimageview:4.3.0'
+
+
 
 
 

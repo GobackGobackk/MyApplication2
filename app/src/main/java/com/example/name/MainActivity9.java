@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -135,5 +136,22 @@ public class MainActivity9 extends AppCompatActivity {
         intent.putExtras(bundle);
         startActivity(intent);
         finish();
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.menu_play) {
+            Intent intent = new Intent(MainActivity9.this, MainActivity19.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("UserId", userId);
+            intent.putExtras(bundle);
+            startActivity(intent);
+            finish();
+        }
+        return true;
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.seventh_menu, menu);
+        return true;
     }
 }

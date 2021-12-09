@@ -225,63 +225,63 @@ public class MainActivity23 extends AppCompatActivity {
         FriendReference = database.getReference("chatRooms/userProfiles/"+id+"/fbFriends");
         UserReference = database.getReference("chatRooms/userProfiles/"+id);
 
-        if(mUser != null) {
-            GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
-                    new GraphRequest.GraphJSONObjectCallback() {
-                        @Override
-                        public void onCompleted(JSONObject object, GraphResponse response) {
-                            Log.d("demo", object.toString());
-                            try {
-                                //id = object.getString("id");
-                                FBname = object.getString("name");
-                                FBemail = object.getString("email");
-//                            FBemail = mUser.getEmail();
-                                gender =  object.getString("gender");
-                                fbId = object.getString("id");
-                                UserHelperClass helperClass = new UserHelperClass(id, FBname, FBemail, gender, fbId);
-                                reference.child(id).setValue(helperClass);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-            //實立化一個 Bundle
-            Bundle userbundle = new Bundle();
-            //儲存資料　第一個為參數key，第二個為Value
-            userbundle.putString("fields", "gender, name, id, email, first_name, last_name");
-            graphRequest.setParameters(userbundle);
-            //An asynchronous call does not block the program from code execution.
-            // In other word, it is running on a separate thread in the background.
-            // Therefore, this Graph API request will be occuring in the background.
-            graphRequest.executeAsync();
-
-            //retrieve FB friends
-            GraphRequest graphRequestFriends = GraphRequest.newMyFriendsRequest(AccessToken.getCurrentAccessToken(),
-                    new GraphRequest.GraphJSONArrayCallback() {
-                        @Override
-                        public void onCompleted(JSONArray objects, GraphResponse response) {
-                            Log.d("Demo", objects.toString());
-                            //Log.d("demo", String.valueOf(objects.length())); objects.length()可以成功顯示該用戶有多少位朋友。
-                            ArrayList<FBFriends> fbFriends = new ArrayList<>();
-                            for (int i = 0; i < objects.length(); i++) {
-                                try {
-                                    JSONObject object = objects.getJSONObject(i);
-                                    String FacebookId = object.getString("id");
-                                    fbFriends.add(new FBFriends(object.getString("name"), FacebookId));
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-//                            FriendReference.addListenerForSingleValueEvent();
-                            Log.d("Demoo", String.valueOf(fbFriends));
-                            FriendReference.setValue(fbFriends);
-                        }
-                    });
-            Bundle bundleFriend = new Bundle();
-            bundleFriend.putString("fields", "id, name");
-            graphRequestFriends.setParameters(bundleFriend);
-            graphRequestFriends.executeAsync();
-        }
+//        if(mUser != null) {
+//            GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
+//                    new GraphRequest.GraphJSONObjectCallback() {
+//                        @Override
+//                        public void onCompleted(JSONObject object, GraphResponse response) {
+//                            Log.d("demo", object.toString());
+//                            try {
+//                                //id = object.getString("id");
+//                                FBname = object.getString("name");
+//                                FBemail = object.getString("email");
+////                            FBemail = mUser.getEmail();
+//                                gender =  object.getString("gender");
+//                                fbId = object.getString("id");
+//                                UserHelperClass helperClass = new UserHelperClass(id, FBname, FBemail, gender, fbId);
+//                                reference.child(id).setValue(helperClass);
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    });
+//            //實立化一個 Bundle
+//            Bundle userbundle = new Bundle();
+//            //儲存資料　第一個為參數key，第二個為Value
+//            userbundle.putString("fields", "gender, name, id, email, first_name, last_name");
+//            graphRequest.setParameters(userbundle);
+//            //An asynchronous call does not block the program from code execution.
+//            // In other word, it is running on a separate thread in the background.
+//            // Therefore, this Graph API request will be occuring in the background.
+//            graphRequest.executeAsync();
+//
+//            //retrieve FB friends
+//            GraphRequest graphRequestFriends = GraphRequest.newMyFriendsRequest(AccessToken.getCurrentAccessToken(),
+//                    new GraphRequest.GraphJSONArrayCallback() {
+//                        @Override
+//                        public void onCompleted(JSONArray objects, GraphResponse response) {
+//                            Log.d("Demo", objects.toString());
+//                            //Log.d("demo", String.valueOf(objects.length())); objects.length()可以成功顯示該用戶有多少位朋友。
+//                            ArrayList<FBFriends> fbFriends = new ArrayList<>();
+//                            for (int i = 0; i < objects.length(); i++) {
+//                                try {
+//                                    JSONObject object = objects.getJSONObject(i);
+//                                    String FacebookId = object.getString("id");
+//                                    fbFriends.add(new FBFriends(object.getString("name"), FacebookId));
+//                                } catch (JSONException e) {
+//                                    e.printStackTrace();
+//                                }
+//                            }
+////                            FriendReference.addListenerForSingleValueEvent();
+//                            Log.d("Demoo", String.valueOf(fbFriends));
+//                            FriendReference.setValue(fbFriends);
+//                        }
+//                    });
+//            Bundle bundleFriend = new Bundle();
+//            bundleFriend.putString("fields", "id, name");
+//            graphRequestFriends.setParameters(bundleFriend);
+//            graphRequestFriends.executeAsync();
+//        }
 
         //分隔線
         a1.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {

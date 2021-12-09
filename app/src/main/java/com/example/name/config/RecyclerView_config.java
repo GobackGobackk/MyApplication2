@@ -127,7 +127,7 @@ public class RecyclerView_config {
                 public void onClick(View v) {
                     Log.d("TAG","onClick: clicked on: " + mKeys.get(position));
 
-                    Toast.makeText(mContext, mKeys.get(position), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(mContext, mKeys.get(position), Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(mContext, test.class);
                     intent.putExtra("url", mKeys.get(position));
@@ -138,15 +138,15 @@ public class RecyclerView_config {
             //user setting
 //            String user = "Fp0VJqVhyKZrSo45iYSK1ll7a1s2"; // user id
 //            String name = "天竺鼠  "; // user name
-            String pic = "https://upload.wikimedia.org/wikipedia/commons/7/70/User_icon_BLACK-01.png"; //user pic
-
+//            String pic = "https://upload.wikimedia.org/wikipedia/commons/7/70/User_icon_BLACK-01.png"; //user pic
+            String pic = "https://syufree-style.club/room/wp-content/uploads/2017/12/boy_05.png";
             //查看人選
             btnInvent = holder.itemView.findViewById(R.id.btn_invent);
 
             btnInvent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(),"click", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(v.getContext(),"click", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(mContext, inventer.class);
                     intent.putExtra("url", mKeys.get(position));
                     intent.putExtra("myName", name);

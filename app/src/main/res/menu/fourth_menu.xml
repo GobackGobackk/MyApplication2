@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:title="交流圈" app:showAsAction="never"
-        android:id="@+id/menu_group"/>
-    <item android:title="個別聊天室" app:showAsAction="never"
+    <item android:title="交流圈" app:showAsAction="always"
+        android:id="@+id/menu_group"
+        android:icon="@drawable/ic_baseline_forum_24"/>
+    <item android:title="個別聊天室" app:showAsAction="always"
+        android:icon="@drawable/ic_baseline_people_24"
         android:id="@+id/menu_two_people_chat"/>
-
 </menu>

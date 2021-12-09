@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.annotations.NotNull;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,7 +35,7 @@ public class MainActivity22 extends AppCompatActivity {
     @BindView(R.id.textView71)
     TextView text;
     private FirebaseDatabase database;
-    private DatabaseReference myRef, calendarRef, userRef, groupRef;
+    private DatabaseReference myRef, myRef2, userRef, groupRef;
     private String grpId, groupName, userId, calId, goal;
     private User user;
     private GroupChatRoom groupChatRoom;
@@ -73,7 +74,7 @@ public class MainActivity22 extends AppCompatActivity {
             }
         });
     }
-    @OnClick(R.id.button2)
+    @OnClick(R.id.button2)//非好友創群
     public void ajk(View view){
         grpId = groupRef.push().getKey();
         groupChatRoom = new GroupChatRoom();
@@ -88,8 +89,77 @@ public class MainActivity22 extends AppCompatActivity {
             groupChatRoom.setPic("Female");
         }
         groupRef.child(grpId).setValue(groupChatRoom);
+
         Python py = Python.getInstance();
         py.getModule("group").get("main").call(userId,grpId);
+        groupRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @org.jetbrains.annotations.NotNull DataSnapshot snapshot) {
+                for(DataSnapshot child : snapshot.getChildren()){
+                    for(DataSnapshot child2 : child.child("members").getChildren()){
+                        myRef2 = database.getReference("chatRooms/userProfiles/"+child2.getKey());
+                        myRef2.child("group").child(grpId).child("groupId").setValue(grpId);
+                        myRef2.child("group").child(grpId).child("groupName").setValue(groupName);
+                        //將選到的 topic 進行 subscribe (這個topic屆時會替換成群組id)
+                        FirebaseMessaging.getInstance().subscribeToTopic(grpId);
+                        //如果訂閱成功，就同步更新資料庫的判斷
+                        String HasSubscribed = "1";
+                        myRef2.child("group").child(grpId).child("HasSubscribed").setValue(HasSubscribed);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @org.jetbrains.annotations.NotNull DatabaseError error) {
+
+            }
+        });
+        Intent intent = new Intent(MainActivity22.this, MainActivity25.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("UserId", userId);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
+    }
+    @OnClick(R.id.button7)//好友創群
+    public void jj(View view){
+        grpId = groupRef.push().getKey();
+        groupChatRoom = new GroupChatRoom();
+        String createdOn = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss").format(new Date());
+        groupChatRoom.setGroupId(grpId);
+        groupChatRoom.setGroupName(groupName);
+        groupChatRoom.setCreatedOn(createdOn);
+        if(text.getText().toString().equals("Male")){
+            groupChatRoom.setPic("Male");
+        }
+        else{
+            groupChatRoom.setPic("Female");
+        }
+        groupRef.child(grpId).setValue(groupChatRoom);
+        Python py = Python.getInstance();
+        py.getModule("t_3").get("main").call(userId,grpId);
+//        groupRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull @org.jetbrains.annotations.NotNull DataSnapshot snapshot) {
+//                for(DataSnapshot child : snapshot.getChildren()){
+//                    for(DataSnapshot child2 : child.child("members").getChildren()){
+//                        myRef2 = database.getReference("chatRooms/userProfiles/"+child2.getKey());
+//                        myRef2.child("group").child(grpId).child("groupId").setValue(grpId);
+//                        myRef2.child("group").child(grpId).child("groupName").setValue(groupName);
+//                        //將選到的 topic 進行 subscribe (這個topic屆時會替換成群組id)
+//                        FirebaseMessaging.getInstance().subscribeToTopic(grpId);
+//                        //如果訂閱成功，就同步更新資料庫的判斷
+//                        String HasSubscribed = "1";
+//                        myRef2.child("group").child(grpId).child("HasSubscribed").setValue(HasSubscribed);
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull @org.jetbrains.annotations.NotNull DatabaseError error) {
+//
+//            }
+//        });
         Intent intent = new Intent(MainActivity22.this, MainActivity25.class);
         Bundle bundle = new Bundle();
         bundle.putString("UserId", userId);
@@ -118,5 +188,14 @@ public class MainActivity22 extends AppCompatActivity {
             }
         });
         return true;
+    }
+    @OnClick(R.id.login10)
+    public void nn(View view){
+        Intent intent = new Intent(MainActivity22.this, MainActivity25.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("UserId", userId);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
     }
 }

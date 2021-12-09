@@ -128,14 +128,14 @@ public class MainActivity25 extends AppCompatActivity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.menu_sign_out) {
-//            mAuth.signOut();
-            mAuth.getInstance().signOut();
-            LoginManager.getInstance().logOut();
+//        if(item.getItemId() == R.id.menu_sign_out) {
+////            mAuth.signOut();
+//            mAuth.getInstance().signOut();
+//            LoginManager.getInstance().logOut();
+////            startActivity(new Intent(MainActivity25.this, MainActivity.class));
 //            startActivity(new Intent(MainActivity25.this, MainActivity.class));
-            startActivity(new Intent(MainActivity25.this, MainActivity.class));
-            finish();
-        }
+//            finish();
+//        }
         if(item.getItemId() == R.id.menu_create_group) {
             Intent intent = new Intent(MainActivity25.this, MainActivity20.class);
             Bundle bundle = new Bundle();
@@ -182,6 +182,7 @@ public class MainActivity25 extends AppCompatActivity {
             }
         };
         searchView.setOnQueryTextListener(queryTextListener);
+
         MenuItem menuItem1 = menu.findItem(R.id.favorite);
         menuItem1.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -193,6 +194,32 @@ public class MainActivity25 extends AppCompatActivity {
                         Bundle bundle = new Bundle();
                         bundle.putString("UserId", userId);
                         bundle.putString("UserName", snapshot.child("name").getValue().toString());
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+
+                return true;
+            }
+        });
+
+        MenuItem menuItem2 = menu.findItem(R.id.ring);
+        menuItem2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                userRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        Intent intent = new Intent(MainActivity25.this, MainActivity35.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("UserId", userId);
+//                        bundle.putString("UserName", snapshot.child("name").getValue().toString());
                         intent.putExtras(bundle);
                         startActivity(intent);
                         finish();

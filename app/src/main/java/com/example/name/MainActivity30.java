@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -25,6 +26,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity30 extends AppCompatActivity {
     @BindView(R.id.recyclerViewChat)
@@ -76,5 +78,14 @@ public class MainActivity30 extends AppCompatActivity {
 
             }
         });
+    }
+    @OnClick(R.id.login8)
+    public void asd(View view){
+        Intent intent = new Intent(MainActivity30.this, MainActivity24.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("UserId", userId);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
     }
 }

@@ -87,132 +87,120 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("chatRooms/userProfiles");
-//        String[] City = new String[]{"臺北市","新北市","基隆市","宜蘭縣",
-//                "桃園市","新竹市","新竹縣","苗栗縣",
-//                "臺中市","彰化縣","南投縣","雲林縣",
-//                "嘉義市","嘉義縣","臺南市","高雄市", "屏東縣",
-//                "花蓮縣","臺東縣","澎湖縣","金門縣","連江縣"};
-//        ArrayAdapter<String> adapterCity = new ArrayAdapter<String>
-//                (this, android.R.layout.simple_spinner_dropdown_item, City);
-//        adapterCity.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(adapterCity);
 
-        //fb新加的
-//        reference = database.getReference("chatRooms/FB");
-//        FriendReference = database.getReference("chatRooms/FB/"+id+"/fbFriends");
-        mCallbackManager = CallbackManager.Factory.create();
-        btnFacebook = findViewById(R.id.btn_fbutton);
-        btnFacebook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LoginManager.getInstance().logInWithReadPermissions(MainActivity.this, Arrays.asList("user_gender, email"));
-                LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        Log.d(TAG, "facebook:onSuccess:" + loginResult);
-                        handleFacebookAccessToken(loginResult.getAccessToken());
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        Log.d(TAG, "facebook:onCancel");
-                    }
-
-                    @Override
-                    public void onError(FacebookException error) {
-                        Log.d(TAG, "facebook:onError", error);
-                    }
-                });
-            }
-        });
+//        mCallbackManager = CallbackManager.Factory.create();
+//        btnFacebook = findViewById(R.id.btn_fbutton);
+//        btnFacebook.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                LoginManager.getInstance().logInWithReadPermissions(MainActivity.this, Arrays.asList("user_gender, email"));
+//                LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+//                    @Override
+//                    public void onSuccess(LoginResult loginResult) {
+//                        Log.d(TAG, "facebook:onSuccess:" + loginResult);
+//                        handleFacebookAccessToken(loginResult.getAccessToken());
+//                    }
+//
+//                    @Override
+//                    public void onCancel() {
+//                        Log.d(TAG, "facebook:onCancel");
+//                    }
+//
+//                    @Override
+//                    public void onError(FacebookException error) {
+//                        Log.d(TAG, "facebook:onError", error);
+//                    }
+//                });
+//            }
+//        });
 
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // Pass the activity result back to the Facebook SDK
-        mCallbackManager.onActivityResult(requestCode, resultCode, data);
-//        GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
-//                new GraphRequest.GraphJSONObjectCallback() {
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        // Pass the activity result back to the Facebook SDK
+//        mCallbackManager.onActivityResult(requestCode, resultCode, data);
+////        GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
+////                new GraphRequest.GraphJSONObjectCallback() {
+////                    @Override
+////                    public void onCompleted(JSONObject object, GraphResponse response) {
+////                        Log.d("demo", object.toString());
+////                        try {
+////                            id = object.getString("id");
+////                            FBname = object.getString("name");
+////                            //FBemail = object.getString("email");
+//////                            FBemail = mUser.getEmail();
+////                            gender =  object.getString("gender");
+////                            fbId = object.getString("id");
+////                            //UserHelperClass helperClass = new UserHelperClass(id, FBname,FBemail, gender, fbId);
+////                            //reference.child(id).setValue(helperClass);
+////                        } catch (JSONException e) {
+////                            e.printStackTrace();
+////                        }
+////                    }
+////                });
+////        //實立化一個 Bundle
+////        Bundle bundle = new Bundle();
+////        //儲存資料　第一個為參數key，第二個為Value
+////        bundle.putString("fields", "gender, name, id, email, first_name, last_name");
+////        graphRequest.setParameters(bundle);
+////        //An asynchronous call does not block the program from code execution.
+////        // In other word, it is running on a separate thread in the background.
+////        // Therefore, this Graph API request will be occuring in the background.
+////        graphRequest.executeAsync();
+////
+////        //retrieve FB friends
+////        GraphRequest graphRequestFriends = GraphRequest.newMyFriendsRequest(AccessToken.getCurrentAccessToken(),
+////                new GraphRequest.GraphJSONArrayCallback() {
+////                    @Override
+////                    public void onCompleted(JSONArray objects, GraphResponse response) {
+////                        Log.d("Demo", objects.toString());
+////                        //Log.d("demo", String.valueOf(objects.length())); objects.length()可以成功顯示該用戶有多少位朋友。
+////                        ArrayList<FBFriends> fbFriends = new ArrayList<>();
+////                        for (int i = 0; i < objects.length(); i++) {
+////                            try {
+////                                JSONObject object = objects.getJSONObject(i);
+////                                String FacebookId = object.getString("id");
+////                                fbFriends.add(new FBFriends(object.getString("name"), FacebookId));
+////
+////                            } catch (JSONException e) {
+////                                e.printStackTrace();
+////                            }
+////                        }
+////                    }
+////                });
+////        Bundle bundleFriend = new Bundle();
+////        bundleFriend.putString("fields", "id, name");
+////        graphRequestFriends.setParameters(bundleFriend);
+////        graphRequestFriends.executeAsync();
+//
+//    }
+//
+//    private void handleFacebookAccessToken(AccessToken token) {
+//        Log.d(TAG, "handleFacebookAccessToken:" + token);
+//
+//        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+//        mAuth.signInWithCredential(credential)
+//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
 //                    @Override
-//                    public void onCompleted(JSONObject object, GraphResponse response) {
-//                        Log.d("demo", object.toString());
-//                        try {
-//                            id = object.getString("id");
-//                            FBname = object.getString("name");
-//                            //FBemail = object.getString("email");
-////                            FBemail = mUser.getEmail();
-//                            gender =  object.getString("gender");
-//                            fbId = object.getString("id");
-//                            //UserHelperClass helperClass = new UserHelperClass(id, FBname,FBemail, gender, fbId);
-//                            //reference.child(id).setValue(helperClass);
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        if (task.isSuccessful()) {
+//                            // Sign in success, update UI with the signed-in user's information
+//                            Log.d(TAG, "signInWithCredential:success");
+//                            FirebaseUser user = mAuth.getCurrentUser();
+//                            startActivity(new Intent(MainActivity.this, MainActivity23.class));
+//                        } else {
+//                            // If sign in fails, display a message to the user.
+//                            //Log.w(TAG, "signInWithCredential:failure", task.getException());
+//                            Toast.makeText(MainActivity.this, "Authentication failed.",
+//                                    Toast.LENGTH_SHORT).show();
 //                        }
 //                    }
 //                });
-//        //實立化一個 Bundle
-//        Bundle bundle = new Bundle();
-//        //儲存資料　第一個為參數key，第二個為Value
-//        bundle.putString("fields", "gender, name, id, email, first_name, last_name");
-//        graphRequest.setParameters(bundle);
-//        //An asynchronous call does not block the program from code execution.
-//        // In other word, it is running on a separate thread in the background.
-//        // Therefore, this Graph API request will be occuring in the background.
-//        graphRequest.executeAsync();
-//
-//        //retrieve FB friends
-//        GraphRequest graphRequestFriends = GraphRequest.newMyFriendsRequest(AccessToken.getCurrentAccessToken(),
-//                new GraphRequest.GraphJSONArrayCallback() {
-//                    @Override
-//                    public void onCompleted(JSONArray objects, GraphResponse response) {
-//                        Log.d("Demo", objects.toString());
-//                        //Log.d("demo", String.valueOf(objects.length())); objects.length()可以成功顯示該用戶有多少位朋友。
-//                        ArrayList<FBFriends> fbFriends = new ArrayList<>();
-//                        for (int i = 0; i < objects.length(); i++) {
-//                            try {
-//                                JSONObject object = objects.getJSONObject(i);
-//                                String FacebookId = object.getString("id");
-//                                fbFriends.add(new FBFriends(object.getString("name"), FacebookId));
-//
-//                            } catch (JSONException e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                    }
-//                });
-//        Bundle bundleFriend = new Bundle();
-//        bundleFriend.putString("fields", "id, name");
-//        graphRequestFriends.setParameters(bundleFriend);
-//        graphRequestFriends.executeAsync();
-
-    }
-
-    private void handleFacebookAccessToken(AccessToken token) {
-        Log.d(TAG, "handleFacebookAccessToken:" + token);
-
-        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            startActivity(new Intent(MainActivity.this, MainActivity23.class));
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            //Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
+//    }
 
 
     public void onStart() {

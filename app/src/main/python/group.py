@@ -1,6 +1,7 @@
 from firebase import firebase
 import math
 import random
+import statistics
 
 key="gheMMEEzZIQTWaVom8odgWFjvVM49TAVeKR59EFm"
 authentication = firebase.FirebaseAuthentication(key, 'renkai284@gmail.com')#進行身分驗證，需要資料庫密鑰和Google資料庫擁有者帳號
@@ -22,7 +23,7 @@ sin_72 = 0.95105651629
 cos_72 = 0.30901699437
 
 AllProfile = firebase.get('/chatRooms/userProfiles',None) #type/:dict all userProfile
-userProfile = firebase.get('/chatRooms/userProfiles',userId) # '當局者'檔案
+userProfile = None #firebase.get('/chatRooms/userProfiles',userId) # '當局者'檔案
 
 #象限
 one = {}
@@ -35,10 +36,179 @@ user_coordinate = {} #’當局者‘座標
 def write_group(userId,grpId):
     ref = '/chatRooms/group/'+grpId
     # group = group_two_s(userId)# 角度配對法統計
-    # group = group_two(userId)# 角度配對法無統計
+    group = group_two(userId)# 角度配對法無統計
     # group = group_one(userId) # 配對法一(satistic_for_dealer)無統計
-    group = group_one_s(userId)#配對法一(satistic_for_dealer)統計
+    # group = group_one_s(userId)#配對法一(satistic_for_dealer)統計
+
+    for i in group:
+        print(AllProfile.get(i).get('goal'))
     firebase.put(ref,'members',group)
+
+def dealwithAllProfile():
+    global AllProfile
+    friend = set()
+    ProfileId = set()
+    ProfileId.add(userId)
+    if userProfile.get('fbFriends'):
+        friend = set()
+        for i in userProfile.get('fbFriends'):
+            friend.add(i.get('facebookId'))
+        for i in list(AllProfile):
+            if AllProfile.get(i).get('fbId') in friend:
+                ProfileId.add(i)
+    if userProfile.get('friends'):
+        friend = set()
+        for i in userProfile.get('friends'):
+            friend.add(userProfile.get('friends').get(i).get('userId'))
+        for i in list(AllProfile):
+            if i in friend:
+                ProfileId.add(i)
+    if userProfile.get('friends') == None and userProfile.get('fbFriends') == None:
+        print('No any friends.')
+    else :
+        if (len(ProfileId)>=15):
+            for i in list(AllProfile):
+                if i not in ProfileId:
+                    del AllProfile[i]
+
+
+
+
+#goal篩選：
+# 1. 選取與使用者有重疊目標（只要有重疊就行）的人
+def goal_similar():
+    # global userProfile
+    # userProfile = firebase.get('/chatRooms/userProfiles', userId)
+    user_goal = set() #<class 'set'>
+    similar_goal_user = {}
+    if userProfile.get('goal'):
+        for i in userProfile.get('goal'):
+            user_goal.add(userProfile.get('goal').get(i).get('goal'))
+        print(user_goal)
+        for i in AllProfile:
+            if AllProfile.get(i).get('goal'):
+                for j in AllProfile.get(i).get('goal'):
+                    if AllProfile.get(i).get('goal').get(j).get('goal') in user_goal:
+                        similar_goal_user[i] = {}
+        users_similar_goals(similar_goal_user)
+        for i in similar_goal_user:
+            print(similar_goal_user.get(i))
+        j_score(user_goal, similar_goal_user)
+        get_goal_set(similar_goal_user)
+        # caculate_goalscore(similar_goal_user)
+    else:
+        print('not any goal.')
+    return similar_goal_user
+
+#2. 把users這個字典的goal補上
+def users_similar_goals(users):
+    for i in list(users):
+        users[i]['goal'] = set()
+        for j in AllProfile.get(i).get('goal'):
+            users[i]['goal'].add(AllProfile.get(i).get('goal').get(j).get('goal'))
+
+
+#3.另法
+def j_score(user_goal,users):
+    print(len(users))
+    print()
+    for i in list(users):
+        j_score = len(users.get(i).get('goal').intersection(user_goal))/len(users.get(i).get('goal').union(user_goal))
+        users[i]['j'] = j_score
+        if users[i]['j']<0.1:
+            del users[i]
+        else:
+            print(users[i])
+    print(len(users))
+
+
+#3. 計算各個目標的出現次數當作權重分數(para:set)
+def goalscore(users):
+    goaldict = {}
+    for i in users:
+        for j in users.get(i).get('goal'):
+            if goaldict.get(j) :
+                goaldict[j] = goaldict[j] + 1
+            elif goaldict.get(j) == None:
+                goaldict[j] = 1
+    for i in goaldict:
+        print(i, goaldict.get(i))
+    return goaldict
+# 4. 計算goal分數（include 3.）
+def caculate_goalscore(users):
+    goaldict = goalscore(users)
+    for i in list(users):
+        goal_score = 0
+        goal_number = 0
+        for j in list(users.get(i).get('goal')):
+            goal_score = goaldict.get(j) + goal_score
+            goal_number += 1
+        # j_score = len(users.get(i).get('goal').intersection(users.get(userId).get('goal')))/len(users.get(i).get('goal').union(users.get(userId).get('goal')))
+        users[i]['score'] = (goal_score/goal_number) # *j_score
+    for i in users:
+        print(i)
+        print(users.get(i).get('goal'))
+        print(users.get(i).get('score'))
+
+#4.另法
+def get_goal_set(users):
+    goaldict = goalscore(users)
+    goalset = set()
+    max_num_goal = max(goaldict, key = goaldict.get)
+    std = statistics.stdev(list(goaldict.values()))#標準差
+    mean_num = statistics.mean(list(goaldict.values()))
+    print(std,mean_num)
+    for i in goaldict:
+        if goaldict.get(i) > mean_num+1*std:
+            print(i)
+            goalset.add(i)
+    for i in list(users):
+        j_score = len(users.get(i).get('goal').intersection(goalset))/len(users.get(i).get('goal').union(goalset))
+        if j_score == 0:
+            del users[i]
+        else:
+            users[i]['j_score'] = j_score
+            print(users.get(i))
+    print(len(users))
+
+#檢測四個象限是否為空
+def detect_c():
+    if one and two and three and four:
+        return
+    num1 = 0
+    num2 = 0
+    num3 = 0
+    num4 = 0
+    if one == None:
+        num1 = 1
+    if two == None:
+        num2 = 1
+    if three == None:
+        num3 = 1
+    if four == None:
+        num4 = 1
+
+    APro = firebase.get('/chatRooms/userProfiles',None)
+    for i in APro:
+        if APro.get(i).get('active'):
+            x = APro.get(i).get('active').get('O')-APro.get(i).get('active').get('G')
+            y = APro.get(i).get('active').get('D')-APro.get(i).get('active').get('I')
+            if x > 0:
+                if y > 0:
+                    if num1 :
+                        one[id] = {'x': x, 'y': y}
+                else:
+                    if num4 :
+                        four[id] = {'x': x, 'y': y}
+            else:
+                if y > 0:
+                    if num2 :
+                        two[id] = {'x': x, 'y': y}
+                else:
+                    if num3 :
+                        three[id] = {'x': x, 'y': y}
+
+
 
 # 抓取使用者ID，帶入此檔案的userId
 def get_user(ID):
@@ -62,6 +232,7 @@ def c_ogdi(targetfile):
             two[id] = {'x': x,'y': y}
         else :
             three[id] = {'x': x, 'y': y}
+
 
 # 計算‘當局者‘的x,y，存於=>user_coordinate
 # (當局者(uId),targetfile(userProfile))
@@ -209,7 +380,9 @@ def caculate_frequency(uId, satis_dict):
     return satis_dict.copy()
 
 def get_five_member(satistic): # 從satistic中找5個成員
-    # 法ㄧ： 挑選frequency最大的五人為一組
+    # print('get_five_member:',satistic,'\n')
+    #
+    # # 法ㄧ： 挑選frequency最大的五人為一組
     # index_s = []
     # freq = []
     # for i in satistic:
@@ -244,6 +417,7 @@ def get_five_member(satistic): # 從satistic中找5個成員
             if i_freq >= freq[0]:
                 freq[0] = i_freq
                 index_s[0] = i
+    print('index_s:',index_s,'\n')
 
     return index_s
 
@@ -375,30 +549,53 @@ def group_two_s(userId):
         print(one_two_three_four(i), satistic.get(i))
     group.clear()
     group = get_five_member(satistic)
-    print()
+
     for i in group:
-        del satistic[i]['frequency']
         print(one_two_three_four(i), satistic.get(i))
+        if satistic.get(i):
+            if satistic.get(i).get('frequency'):
+                del satistic[i]['frequency']
+        # print(one_two_three_four(i), satistic.get(i))
+
+    for i in list(satistic):
+        if satistic.get(i).get('frequency') != None:
+            del satistic[i]
     userN = []
+    print('group:',group)
     for i in group:
         userN.append(satistic.get(i).get('displayName'))
     print(userN)
+    print(satistic)
     return satistic
 
-
-#===============start====================
-def initial_data():
-    for i in AllProfile:
-        print(i)
-        c_ogdi(AllProfile.get(i))
+def classify_data(filter):
+    for i in list(AllProfile):
+        if i == userId:
+            continue
+        if i not in filter:
+            del AllProfile[i]
+        else:
+            print(i)
+            c_ogdi(AllProfile.get(i))
     print('分類成功')
+    print(one)
+    print(two)
+    print(three)
+    print(four)
 
 def main(userId,grpId):
-    initial_data()
+    global userProfile
+    userProfile = firebase.get('/chatRooms/userProfiles', userId)
     get_user(userId)
+    dealwithAllProfile()
+    detect_c()
+    filter = goal_similar()
+    classify_data(filter)
     write_group(userId, grpId)
 
-main('fxrQ4lOZVbM9ZydXypJ40hZWIHh2','ttttt')
+#===============start====================
+
+# main('NU4CPYyA0eW3WtSg2G9UC2OcU643','ttttt')
 
 
 

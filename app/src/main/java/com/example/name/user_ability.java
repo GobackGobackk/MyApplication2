@@ -99,17 +99,20 @@ public class user_ability extends AppCompatActivity {
                 myRef = database.getReference("tryChat/");
                 myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        for(DataSnapshot child : dataSnapshot.getChildren()){
-                            if(child.hasChild("members")){
-                                if(child.child("members").hasChild(this_uid) && child.child("members").hasChild(myUserId)){
-                                    build = false;
-                                    break;
-                                }
-                                else{
-                                    build = true;
+                        if(dataSnapshot.exists()){
+                            for(DataSnapshot child : dataSnapshot.getChildren()){
+                                if(child.hasChild("members")){
+                                    if(child.child("members").hasChild(this_uid) && child.child("members").hasChild(myUserId)){
+                                        build = false;
+                                        break;
+                                    }
+                                    else{
+                                        build = true;
+                                    }
                                 }
                             }
-                        }
+                        }else build = true;
+
                         if(build == true){
                             String grpId = myRef.push().getKey();
                             myRef.child(grpId).child("groupId").setValue(grpId);

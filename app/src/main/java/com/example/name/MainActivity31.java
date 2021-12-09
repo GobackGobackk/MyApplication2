@@ -91,6 +91,12 @@ public class MainActivity31 extends AppCompatActivity {
 
             }
         });
+        Intent intent = new Intent(MainActivity31.this, MainActivity25.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("UserId", userId);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
     }
     @OnClick(R.id.login5)
     public void nn(View view){

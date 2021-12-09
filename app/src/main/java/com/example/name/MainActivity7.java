@@ -286,6 +286,15 @@ public class MainActivity7 extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+    @OnClick(R.id.login12)
+    public void kkk(View view) {
+        Intent intent = new Intent(MainActivity7.this, MainActivity6.class);
+//        Bundle bundle = new Bundle();
+//        bundle.putString("UserId", userId);
+//        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
+    }
     String formatDate(Date date){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // HH是24小時制，hh是12小時制
         return sdf.format(date);

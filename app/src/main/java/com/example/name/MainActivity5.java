@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -26,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import com.facebook.login.LoginManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -62,6 +64,7 @@ public class MainActivity5 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main5);
+        mAuth = FirebaseAuth.getInstance();
         ButterKnife.bind(this);
 
         Intent intent = this.getIntent();
@@ -208,5 +211,28 @@ public class MainActivity5 extends AppCompatActivity {
             public void onCancelled(DatabaseError error) {
             }
         });
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.menu_sign_out) {
+            //先判斷看看登出要不要把 token 去掉
+            String uid = mAuth.getCurrentUser().getUid();
+            clearToken(uid);
+            //
+            mAuth.getInstance().signOut();
+            LoginManager.getInstance().logOut();
+//            startActivity(new Intent(MainActivity25.this, MainActivity.class));
+            startActivity(new Intent(MainActivity5.this, MainActivity.class));
+            finish();
+        }
+        return true;
+    }
+    private void clearToken(String uid){
+        database.getReference("Tokens").child(uid).removeValue();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.sixth_menu, menu);
+        return true;
     }
 }

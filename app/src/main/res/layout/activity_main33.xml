@@ -35,7 +35,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="80dp"
             android:background="@drawable/background_light"
-            android:drawableLeft="@drawable/ic_baseline_check_24"
+            android:drawableLeft="@drawable/ic_baseline_check_24_white"
             android:fontFamily="@font/ubuntu_medium"
             android:gravity="center"
             android:paddingLeft="15dp"

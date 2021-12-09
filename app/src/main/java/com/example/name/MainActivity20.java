@@ -53,4 +53,13 @@ public class MainActivity20 extends AppCompatActivity {
             startActivity(intent);
             finish();
     }
+    @OnClick(R.id.login11)
+    public void nn(View view){
+        Intent intent = new Intent(MainActivity20.this, MainActivity25.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("UserId", userId);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
+    }
 }

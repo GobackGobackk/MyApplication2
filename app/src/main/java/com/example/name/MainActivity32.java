@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.name.config.config;
 import com.example.name.config.config3;
@@ -23,6 +24,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity32 extends AppCompatActivity {
     @BindView(R.id.recyclerViewChat)
@@ -55,7 +57,7 @@ public class MainActivity32 extends AppCompatActivity {
                         GroupChatRoom group = child.getValue(GroupChatRoom.class);
 
                         for(DataSnapshot child2 : child.child("members").getChildren()){
-                            if(!userName.equals(child2.child("displayName").getValue().toString())){//group.getGroupName惡魔貓男
+                            if(!userName.equals(child2.child("displayName").getValue().toString())){
                                 group.setGroupName(child2.child("displayName").getValue().toString());
                             }
                         }
@@ -73,5 +75,16 @@ public class MainActivity32 extends AppCompatActivity {
 
             }
         });
+    }
+    @OnClick(R.id.login9)
+    public void jj(View view){
+
+        Intent intent = new Intent(MainActivity32.this, MainActivity25.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("UserId", userId);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
+
     }
 }

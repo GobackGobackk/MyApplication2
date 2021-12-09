@@ -3,9 +3,12 @@ package com.example.name;
 import androidx.annotation.NonNull;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,12 +21,14 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.name.Notifications.FcmNotificaionSender;
 import com.example.name.model.Calendarrr;
 import com.example.name.model.Habit;
 import com.example.name.model.Msg;
 import com.example.name.model.Profile;
 import com.example.name.model.Timeee;
 import com.example.name.model.User;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -70,10 +75,12 @@ public class MainActivity16 extends Activity implements View.OnClickListener {
     TextView text8;//傳資料用
     @BindView(R.id.textView78)
     TextView text9;//傳資料用
+    @BindView(R.id.textView92)
+    TextView text10;//傳資料用
     private FirebaseDatabase database;
-    private DatabaseReference myRef, userRef, detailRef, lateRef, lateRef2, uRef, mRef, abilityRef, timeRef;
+    private DatabaseReference myRef, userRef, detailRef, lateRef, lateRef2, uRef, mRef, abilityRef, timeRef, gRef;
     ArrayList<String> ar = new ArrayList<String>();
-    private String userId, sel, groupId;
+    private String userId, sel, ssss;
     private User user;
     private HashMap<String, Integer> hashMap = new HashMap<>();
 
@@ -86,7 +93,9 @@ public class MainActivity16 extends Activity implements View.OnClickListener {
     private Chronometer chronometer;
     private boolean oneTime = false;
     private boolean isPause = false; // 用於判斷是否爲暫停狀態
-
+    //new for 11/7 notifications
+    String userToken;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,8 +166,24 @@ public class MainActivity16 extends Activity implements View.OnClickListener {
 //                            int ii = Integer.valueOf(temp3.intValue());
 
                             if(!child.child("notification").equals("")){
-                                String ssss = child.child("notification").getValue().toString();
-                                mRef = database.getReference("chatRooms/messages/"+ssss);
+                                ssss = child.child("notification").getValue().toString();//群組id
+                                mRef = database.getReference("chatRooms/ring/"+ssss);
+                                gRef = database.getReference("chatRooms/group/"+ssss);
+//                                gRef = database.getReference("chatRooms/group/"+ssss+"/members/");
+                                gRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                        text10.setText(snapshot.child("groupName").getValue().toString());
+                                        for(DataSnapshot child : snapshot.child("members").getChildren()){
+                                            mRef.child("members").child(child.getKey()).child("userId").setValue(child.getKey());
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                                    }
+                                });
                             }
                         }
                     }
@@ -228,7 +253,7 @@ public class MainActivity16 extends Activity implements View.OnClickListener {
                                     Double temp = (Double.parseDouble(val.child("timee").getValue().toString().split(":")[0]) * 60 + Double.parseDouble(val.child("timee").getValue().toString().split(":")[1]));
                                     String nowww = new SimpleDateFormat("HH:mm").format(new Date());
                                     Double noww = (Double.parseDouble(nowww.split(":")[0]) * 60 + Double.parseDouble(nowww.split(":")[1]));
-                                    if (temp < noww) {//就當天 該活動而言 執行時間比計畫時間晚
+                                    if (temp < noww) { //就當天 該活動而言 執行時間比計畫時間晚
                                         lateBad.setText("遲到 BAD!");
                                         if (oneTime == false) {
                                             String wer = dateString+sel;
@@ -295,6 +320,29 @@ public class MainActivity16 extends Activity implements View.OnClickListener {
                     Msg msg = new Msg(messageId, content, user.getId(),
                             user.getName(), createdOn ,Msg.TYPE_SENT);
                     mRef.child(messageId).setValue(msg);
+                    mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                        }
+                    });
+                    //send notification
+//                    String receiver_name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+                    String receiver_name = user.getName();
+
+                    String myText = "你的"+ text10.getText().toString() +"群組中有人"+ content;
+                    //sendNotfification(userId, receiver_name, myText);
+
+                    //send Notification to topic(groupId)
+                    FcmNotificaionSender notificaionSender = new FcmNotificaionSender("/topics/"+ssss, "You got a message.",
+                            myText, getApplicationContext(), MainActivity16.this);
+                    notificaionSender.SendNotifications();
+
                 }
 
                 //計算準時率
@@ -417,5 +465,34 @@ public class MainActivity16 extends Activity implements View.OnClickListener {
 //        intent.putExtras(bundle);
         startActivity(intent);
         finish();
+    }
+
+    //new for 10/22
+    private void sendNotfification(String receiver_id, String receiver_name, String message){
+
+        FirebaseDatabase.getInstance().getReference("Tokens").child(receiver_id)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NotNull DataSnapshot snapshot) {
+                        userToken = snapshot.getValue().toString();
+                        Log.d("demo", userToken);
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NotNull DatabaseError error) {
+
+                    }
+                });
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                FcmNotificaionSender notificaionSender = new FcmNotificaionSender(userToken, "You've got a message", receiver_name+ " : " +message,
+                        getApplicationContext(), MainActivity16.this);
+                notificaionSender.SendNotifications();
+            }
+        }, 3000);
     }
 }

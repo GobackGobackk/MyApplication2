@@ -2,6 +2,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/ring"
+        android:icon="@drawable/ic_baseline_notifications_none_24"
+        android:title="ring"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/favorite"
         android:icon="@drawable/ic_baseline_favorite_24"
         android:title="Favorite"
@@ -12,9 +17,9 @@
         android:title="Search"
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="always" />
-    <item android:title="登出" app:showAsAction="never"
-        android:id="@+id/menu_sign_out"/>
-    <item android:title="創建群組" app:showAsAction="never"
+
+    <item android:title="創建群組" app:showAsAction="always"
+        android:icon="@drawable/ic_baseline_add_24"
         android:id="@+id/menu_create_group"/>
 
 </menu>

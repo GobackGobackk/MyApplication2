@@ -26,6 +26,7 @@ import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity17 extends AppCompatActivity {
     @BindView(R.id.list123)
@@ -93,5 +94,14 @@ public class MainActivity17 extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    @OnClick(R.id.login7)
+    public void asd(View view){
+        Intent intent = new Intent(MainActivity17.this, MainActivity6.class);
+//        Bundle bundle = new Bundle();
+//        bundle.putString("UserId", userId);
+//        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
     }
 }

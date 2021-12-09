@@ -59,6 +59,7 @@ public class unlock_ability  extends AppCompatActivity {
                 intent.putExtra("myName", myName);
                 intent.putExtra("myUserId", myUserId);
                 startActivity(intent);
+                unlock_ability.this.finish();
             }
         });
 
