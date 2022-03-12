@@ -40,16 +40,16 @@
 
 
 **記錄玩樂時間**<br><br>
-[![記錄玩樂時間](http://img.youtube.com/vi/pLICwyTp0oI/0.jpg)](https://www.youtube.com/watch?v=pLICwyTp0oI "記錄玩樂時間")<br>
+[![記錄玩樂時間](http://img.youtube.com/vi/pLICwyTp0oI/0.jpg)](https://www.youtube.com/watch?v=pLICwyTp0oI "記錄玩樂時間")<br><br>
 **聊天室**<br><br>
-[![聊天室](http://img.youtube.com/vi/xnvjVUud6RA/0.jpg)](https://www.youtube.com/watch?v=xnvjVUud6RA "聊天室")<br>
+[![聊天室](http://img.youtube.com/vi/xnvjVUud6RA/0.jpg)](https://www.youtube.com/watch?v=xnvjVUud6RA "聊天室")<br><br>
 **邀請好友**<br><br>
-[![邀請好友](http://img.youtube.com/vi/sXSN6jE9qTc/0.jpg)](https://www.youtube.com/watch?v=sXSN6jE9qTc "邀請好友")<br>
+[![邀請好友](http://img.youtube.com/vi/sXSN6jE9qTc/0.jpg)](https://www.youtube.com/watch?v=sXSN6jE9qTc "邀請好友")<br><br>
 **接受好友邀請**<br><br>
-[![接受好友邀請](http://img.youtube.com/vi/Qvcp5hRprD4/0.jpg)](https://www.youtube.com/watch?v=Qvcp5hRprD4 "接受好友邀請")<br>
+[![接受好友邀請](http://img.youtube.com/vi/Qvcp5hRprD4/0.jpg)](https://www.youtube.com/watch?v=Qvcp5hRprD4 "接受好友邀請")<br><br>
 
 
 **推播**<br><br>
-[![推播](http://img.youtube.com/vi/zcTOi125zKw/0.jpg)](https://www.youtube.com/watch?v=zcTOi125zKw "推播")<br>
+[![推播](http://img.youtube.com/vi/zcTOi125zKw/0.jpg)](https://www.youtube.com/watch?v=zcTOi125zKw "推播")<br><br>
 **個人資料**<br><br>
-[![個人資料](http://img.youtube.com/vi/U1ttjiMNs1w/0.jpg)](https://www.youtube.com/watch?v=U1ttjiMNs1w "個人資料")<br>
+[![個人資料](http://img.youtube.com/vi/U1ttjiMNs1w/0.jpg)](https://www.youtube.com/watch?v=U1ttjiMNs1w "個人資料")<br><br>
