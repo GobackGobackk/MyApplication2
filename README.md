@@ -19,6 +19,7 @@
 [![行事曆](http://img.youtube.com/vi/cro7EYZlC9c/0.jpg)](https://www.youtube.com/watch?v=cro7EYZlC9c "行事曆")<br>
 
 **競賽**<br>
+
 有 交流 參賽 看人選這三個鍵<br>
 交流: 加入交流圈<br>
 參賽: 加入比賽 人選會多自己的名字看人選:<br>
@@ -29,7 +30,7 @@
 
 右上角 兩個人圖示 是 個別聊天室<br>
 旁邊的 聊天圖示 是 交流圈<br><br>
-[![競賽](http://img.youtube.com/vi/hgJ9miJs3eE/0.jpg)](https://www.youtube.com/watch?v=hgJ9miJs3eE "競賽")<br>
+[![競賽](http://img.youtube.com/vi/9Y2w07zging/0.jpg)](https://www.youtube.com/watch?v=9Y2w07zging "競賽")<br>
 
 
 **排程**<br>
