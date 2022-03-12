@@ -2,7 +2,10 @@
 主題: 利用群體力量改善拖延<br>
 功能: 行事曆、競賽、聊天、配對、個人資料查看、心理測驗等<br> 
 # Demo
-註冊<br>
+**註冊**<br>
+1. 心理測驗<br>
+2. 設定目標<br>
+3. 忙碌時間<br><br>
 [![註冊](http://img.youtube.com/vi/8ARwV97lLgE/0.jpg)](https://www.youtube.com/watch?v=8ARwV97lLgE "註冊")<br>
 行事曆<br>
 [![行事曆](http://img.youtube.com/vi/kyGFGndv2jM/0.jpg)](https://www.youtube.com/watch?v=kyGFGndv2jM "行事曆")<br>
