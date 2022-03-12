@@ -50,6 +50,6 @@
 
 
 **推播**<br><br>
-[![推播](http://img.youtube.com/vi/zcTOi125zKw/0.jpg)](https://www.youtube.com/watch?v=zcTOi125zKw "推播")<br><br>
+[![推播](http://img.youtube.com/vi/5KUTh7k6wfM/0.jpg)](https://www.youtube.com/watch?v=5KUTh7k6wfM "推播")<br><br>
 **個人資料**<br><br>
 [![個人資料](http://img.youtube.com/vi/U1ttjiMNs1w/0.jpg)](https://www.youtube.com/watch?v=U1ttjiMNs1w "個人資料")<br><br>
