@@ -15,14 +15,12 @@
 1. 點選想要開始的日期<br>
 2. 設定活動名稱 開始及結束時間 結束日期 以及 想將完成活動的通知推到哪個群組<br>
 設定完後 可以點右上角的計時器 會發現清單多了剛才設定的活動<br>
-
 點進去<br>
 1. 開始計時 計時那裡可以快轉<br>
 2. 計時停止後填剛才的專心度<br><br>
 [![行事曆](http://img.youtube.com/vi/cro7EYZlC9c/0.jpg)](https://www.youtube.com/watch?v=cro7EYZlC9c "行事曆")<br>
 
 **競賽**<br>
-
 有 交流 參賽 看人選這三個鍵<br>
 交流: 加入交流圈<br>
 參賽: 加入比賽 人選會多自己的名字看人選:<br>
@@ -30,19 +28,14 @@
 2. 花代幣解鎖<br>
 3. 能力值<br>
 4. 我知道了 -> 取消 試聊三天 -> 加到個別聊天室<br><br>
-
 右上角 兩個人圖示 是 個別聊天室<br>
 旁邊的 聊天圖示 是 交流圈<br><br>
 [![競賽](http://img.youtube.com/vi/SRjxl4hWDnA/0.jpg)](https://www.youtube.com/watch?v=SRjxl4hWDnA "競賽")<br>
 
-
 **排程**<br>
-
 休息 按返回鍵可以跳過<br>
 做事 按返回鍵可以放棄<br><br>
 [![排程](http://img.youtube.com/vi/3nLJD2BjuOU/0.jpg)](https://www.youtube.com/watch?v=3nLJD2BjuOU "排程")<br>
-
-
 
 **記錄玩樂時間**<br><br>
 [![記錄玩樂時間](http://img.youtube.com/vi/pLICwyTp0oI/0.jpg)](https://www.youtube.com/watch?v=pLICwyTp0oI "記錄玩樂時間")<br><br>
